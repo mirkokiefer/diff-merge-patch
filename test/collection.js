@@ -8,8 +8,8 @@ describe('collection diff', function() {
     var after = [4,1,2,5]
 
     var expectedDiff = {
-      '-': [3, 3],
-      '+': [5]
+      deleted: [3, 3],
+      added: [5]
     }
     var result = diff(before, after)
     assert.deepEqual(result, expectedDiff)
