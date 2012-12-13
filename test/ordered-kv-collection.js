@@ -23,20 +23,17 @@ var modified2 = [
 
 var diff1Expected = {
   values: {
-    1: ['m', 1, 5],
-    2: ['=', 2],
-    3: ['m', 3, 8],
-    4: ['=', 4],
-    5: ['+', 6]
+    modified: [{key: 1, value: 5}, {key: 3, value: 8}],
+    added: [{key: 5, value: 6}],
+    deleted: []
   },
   keys: [["x",1],["x",2],["+",5],["=",3],["p",2],["=",4],["p",1]]
 }
 var diff2Expected = {
   values: {
-    1: ['m', 1, 9],
-    2: ['=', 2],
-    3: ['-', 3],
-    4: ['m', 4, 5]
+    modified: [{key: 1, value: 9}, {key: 4, value: 5}],
+    added: [],
+    deleted: [3]
   },
   keys: [["x",1],["=",2],["-",3],["p",1],["=",4]]
 }
