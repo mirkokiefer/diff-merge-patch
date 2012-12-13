@@ -3,22 +3,22 @@ var assert = require('assert')
 var diff = require('../lib/ordered-kv-collection')
 
 var origin = [
-  {id: 1, value: 1},
-  {id: 2, value: 2},
-  {id: 3, value: 3},
-  {id: 4, value: 4}
+  {key: 1, value: 1},
+  {key: 2, value: 2},
+  {key: 3, value: 3},
+  {key: 4, value: 4}
 ]
 var modified1 = [
-  {id: 5, value: 6},
-  {id: 3, value: 8},
-  {id: 2, value: 2},
-  {id: 4, value: 4},
-  {id: 1, value: 5}
+  {key: 5, value: 6},
+  {key: 3, value: 8},
+  {key: 2, value: 2},
+  {key: 4, value: 4},
+  {key: 1, value: 5}
 ]
 var modified2 = [
-  {id: 2, value: 2},
-  {id: 1, value: 9},
-  {id: 4, value: 5}
+  {key: 2, value: 2},
+  {key: 1, value: 9},
+  {key: 4, value: 5}
 ]
 
 var diff1Expected = {
@@ -29,7 +29,7 @@ var diff1Expected = {
     4: ['=', 4],
     5: ['+', 6]
   },
-  ids: [["x",1],["x",2],["+",5],["=",3],["p",2],["=",4],["p",1]]
+  keys: [["x",1],["x",2],["+",5],["=",3],["p",2],["=",4],["p",1]]
 }
 var diff2Expected = {
   values: {
@@ -38,10 +38,10 @@ var diff2Expected = {
     3: ['-', 3],
     4: ['m', 4, 5]
   },
-  ids: [["x",1],["=",2],["-",3],["p",1],["=",4]]
+  keys: [["x",1],["=",2],["-",3],["p",1],["=",4]]
 }
 
-describe('id-diff', function() {
+describe('key-diff', function() {
   it('should find the diffs including value changes', function() {
     var diff1 = diff(origin, modified1)
     assert.deepEqual(diff1, diff1Expected)
