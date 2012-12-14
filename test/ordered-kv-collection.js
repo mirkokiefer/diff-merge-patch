@@ -27,7 +27,7 @@ var diff1Expected = {
     added: [{key: 5, value: 6}],
     deleted: []
   },
-  keys: [["x",1],["x",2],["+",5],["=",3],["p",2],["=",4],["p",1]]
+  keys: [["x", 2], ["+", [5]], ["=", 1], ["p", [1]], ["=", 1], ["p", [0]]]
 }
 var diff2Expected = {
   values: {
@@ -35,10 +35,10 @@ var diff2Expected = {
     added: [],
     deleted: [3]
   },
-  keys: [["x",1],["=",2],["-",3],["p",1],["=",4]]
+  keys: [["x", 1], ["=", 1],["-", 1], ["p", [0]], ["=", 1]]
 }
 
-describe('key-diff', function() {
+describe('ordered key-value diff', function() {
   it('should find the diffs including value changes', function() {
     var diff1 = diff(origin, modified1)
     assert.deepEqual(diff1, diff1Expected)
