@@ -3,7 +3,6 @@ var assert = require('assert')
 
 var orderedColDiff = require('../lib/ordered-collection')
 var diff = orderedColDiff({unique:true})
-var diffCompressed = orderedColDiff({unique:true, compress: true})
 
 describe('ordered collection diff', function() {
   it('should find the position diff', function() {
@@ -16,7 +15,7 @@ describe('ordered collection diff', function() {
       ['p', [0]],
       ['+', [5]]
     ]
-    var diffRes = diff(before, after, true)
+    var diffRes = diff(before, after)
     assert.deepEqual(diffRes, diffExpected)
   })
   it('should find more diffs...', function() {
@@ -30,7 +29,7 @@ describe('ordered collection diff', function() {
       ['=', 1],
       ['p', [3]]
     ]
-    var diffRes1 = diff(before, after1, true)
+    var diffRes1 = diff(before, after1)
     assert.deepEqual(diffRes1, diffExpected1)
 
     var after2 = [1, 2, 3, 4, 7, 5]
@@ -39,20 +38,20 @@ describe('ordered collection diff', function() {
       ['+', [7]],
       ['=', 1]
     ]
-    var diffRes2 = diff(before, after2, true)
+    var diffRes2 = diff(before, after2)
     assert.deepEqual(diffRes2, diffExpected2)
 
     var before = [1,2,3]
     var after = [5,4,3]
     var expected = [['-', 2], ['+', [5, 4]], ['=', 1]]
-    var diffRes3 = diff(before, after, true)
+    var diffRes3 = diff(before, after)
     assert.deepEqual(diffRes3, expected)
 
-    var result = diff([1, 2, 3, 4, 5], [1, 2, 3, 4, 7, 5], true)
+    var result = diff([1, 2, 3, 4, 5], [1, 2, 3, 4, 7, 5])
     var expected = [['=', 4], ['+', [7]], ['=', 1]]
     assert.deepEqual(result, expected)
 
-    var result = diff([1, 2, 3, 4, 5, 6], [1, 2, 3, 6, 4, 5], true)
+    var result = diff([1, 2, 3, 4, 5, 6], [1, 2, 3, 6, 4, 5])
     var expected = [['=', 3],['p', [5]],['=', 2],['x', 1]]
     assert.deepEqual(result, expected)
   })
