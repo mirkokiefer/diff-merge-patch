@@ -1,0 +1,16 @@
+{
+  "name": "mergeit",
+  "version": "0.0.1",
+  "description": "3-way merging of collections, ordered collection, key-value collections and ordered key-value collections",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "author": "Mirko Kiefer <mail@mirkokiefer.com>",
+  "license": "BSD",
+  "dependencies": {
+    "diffit": "0.0.3",
+    "underscore": "~1.4.3"
+  }
+}
