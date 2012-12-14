@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var diff = require('../lib/kv-collection')
+var diff = require('../lib/index').keyValueCollections
 
 var before = [
   {key: 1, value: 1},

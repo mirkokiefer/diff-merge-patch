@@ -1,7 +1,7 @@
 
 var assert = require('assert')
 
-var orderedColDiff = require('../lib/ordered-collection')
+var orderedColDiff = require('../lib/index').orderedCollections
 var diff = orderedColDiff({unique:true})
 
 describe('ordered collection diff', function() {

@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var diff = require('../lib/ordered-kv-collection')
+var diff = require('../lib/index').orderedKeyValueCollections
 
 var origin = [
   {key: 1, value: 1},

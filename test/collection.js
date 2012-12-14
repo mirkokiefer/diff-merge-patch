@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var diff = require('../lib/collection')
+var diff = require('../lib/index').collections
 
 describe('collection diff', function() {
   it('should find all added and deleted values', function() {
