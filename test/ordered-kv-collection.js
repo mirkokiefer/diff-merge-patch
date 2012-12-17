@@ -24,7 +24,7 @@ var modified2 = [
 var diff1Expected = {
   values: {
     update: [{key: 1, value: 5}, {key: 3, value: 8}],
-    add: [{key: 5, value: 6}],
+    insert: [{key: 5, value: 6}],
     delete: []
   },
   keys: [{cut: 2}, {insert: [5]}, {equal: 1}, {paste: [1]}, {equal: 1}, {paste: [0]}]
@@ -32,7 +32,7 @@ var diff1Expected = {
 var diff2Expected = {
   values: {
     update: [{key: 1, value: 9}, {key: 4, value: 5}],
-    add: [],
+    insert: [],
     delete: [3]
   },
   keys: [{cut: 1}, {equal: 1}, {delete: 1}, {paste: [0]}, {equal: 1}]

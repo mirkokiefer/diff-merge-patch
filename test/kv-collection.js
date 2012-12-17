@@ -23,12 +23,12 @@ var after2 = [
 ]
 
 var expectedDiff1 = {
-  add: [{key: 5, value: 6}],
+  insert: [{key: 5, value: 6}],
   update: [{key: 1, value: 5}, {key: 3, value: 8}],
   delete: []
 }
 var expectedDiff2 = {
-  add: [],
+  insert: [],
   update: [{key: 1, value: 9}, {key: 4, value: 5}],
   delete: [3]
 }
