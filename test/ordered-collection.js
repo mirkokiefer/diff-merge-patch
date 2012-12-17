@@ -2,6 +2,7 @@
 var assert = require('assert')
 
 var orderedColDiff = require('../lib/index').orderedCollections
+var types = orderedColDiff.types
 var diff = orderedColDiff({unique:true})
 
 describe('ordered collection diff', function() {
@@ -9,11 +10,11 @@ describe('ordered collection diff', function() {
     var before = [1, 2, 3, 4]
     var after = [2, 1, 5]
     var diffExpected = [
-      {cut: 1},
-      {equal: 1},
-      {delete: 2},
-      {paste: [0]},
-      {insert: [5]}
+      new types.Cut(1),
+      new types.Equal(1),
+      new types.Delete(2),
+      new types.Paste([0]),
+      new types.Insert([5])
     ]
     var diffRes = diff(before, after)
     assert.deepEqual(diffRes, diffExpected)
