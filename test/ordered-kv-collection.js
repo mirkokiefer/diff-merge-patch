@@ -27,7 +27,7 @@ var diff1Expected = {
     added: [{key: 5, value: 6}],
     deleted: []
   },
-  keys: [["x", 2], ["+", [5]], ["=", 1], ["p", [1]], ["=", 1], ["p", [0]]]
+  keys: [{cut: 2}, {insert: [5]}, {equal: 1}, {paste: [1]}, {equal: 1}, {paste: [0]}]
 }
 var diff2Expected = {
   values: {
@@ -35,7 +35,7 @@ var diff2Expected = {
     added: [],
     deleted: [3]
   },
-  keys: [["x", 1], ["=", 1],["-", 1], ["p", [0]], ["=", 1]]
+  keys: [{cut: 1}, {equal: 1}, {delete: 1}, {paste: [0]}, {equal: 1}]
 }
 
 describe('ordered key-value diff', function() {
