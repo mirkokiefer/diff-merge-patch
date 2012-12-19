@@ -2,34 +2,35 @@
 var assert = require('assert')
 var diff = require('../lib/index').keyValueCollections
 
-var before = [
-  {key: 1, value: 1},
-  {key: 2, value: 2},
-  {key: 3, value: 3},
-  {key: 4, value: 4}
-]
+var before = {
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4
+}
 
-var after1 = [
-  {key: 5, value: 6},
-  {key: 3, value: 8},
-  {key: 2, value: 2},
-  {key: 4, value: 4},
-  {key: 1, value: 5}
-]
-var after2 = [
-  {key: 2, value: 2},
-  {key: 1, value: 9},
-  {key: 4, value: 5}
-]
+var after1 = {
+  5: 6,
+  3: 8,
+  2: 2,
+  4: 4,
+  1: 5
+}
+
+var after2 = {
+  2: 2,
+  1: 9,
+  4: 5
+}
 
 var expectedDiff1 = {
-  insert: [{key: 5, value: 6}],
-  update: [{key: 1, value: 5}, {key: 3, value: 8}],
+  insert: {5: 6},
+  update: {1: 5, 3: 8},
   delete: []
 }
 var expectedDiff2 = {
-  insert: [],
-  update: [{key: 1, value: 9}, {key: 4, value: 5}],
+  insert: {},
+  update: {1: 9, 4: 5},
   delete: [3]
 }
 
