@@ -2,6 +2,7 @@
 var assert = require('assert')
 
 var orderedColDiff = require('../lib/index').orderedCollections
+var invert = orderedColDiff.invert
 var types = orderedColDiff.types
 var diff = orderedColDiff({unique:true})
 
@@ -54,6 +55,24 @@ describe('ordered collection diff', function() {
 
     var result = diff([1, 2, 3, 4, 5, 6], [1, 2, 3, 6, 4, 5])
     var expected = [{equal: 3}, {paste: [5]}, {equal: 2}, {cut: 1}]
+    assert.deepEqual(result, expected)
+  })
+  it('should transform the diff to an inverse format', function() {
+    var diff = [
+      new types.Cut(1),
+      new types.Equal(1),
+      new types.Delete(2),
+      new types.Paste([0]),
+      new types.Insert([5])
+    ]
+    var expected = {
+      equal: [[1, 1]],
+      insert: [[4, [5]]],
+      delete: [[2, 2]],
+      cut: [[0, 1]],
+      paste: [[4, [0]]]
+    }
+    var result = invert(diff)
     assert.deepEqual(result, expected)
   })
 })
