@@ -4,75 +4,66 @@ var assert = require('assert')
 var orderedColDiff = require('../lib/index').orderedCollections
 var invert = orderedColDiff.invert
 var types = orderedColDiff.types
-var diff = orderedColDiff({unique:true})
+var diffSeq = orderedColDiff({unique:true})
+var diff = function(a, b) { return invert(diffSeq(a, b)) }
 
 describe('ordered collection diff', function() {
   it('should find the position diff', function() {
     var before = [1, 2, 3, 4]
     var after = [2, 1, 5]
-    var diffExpected = [
-      new types.Cut(1),
-      new types.Equal(1),
-      new types.Delete(2),
-      new types.Paste([0]),
-      new types.Insert([5])
-    ]
-    var diffRes = diff(before, after)
-    assert.deepEqual(diffRes, diffExpected)
+    var expected = {
+      cut: [ [ 0, 1 ] ],
+      equal: [ [ 1, 1 ] ],
+      delete: [ [ 2, 2 ] ],
+      paste: [ [ 3, [0] ] ],
+      insert: [ [ 3, [5] ] ]
+    }
+    var result = diff(before, after)
+    assert.deepEqual(result, expected)
   })
   it('should find more diffs...', function() {
     var before = [1, 2, 3, 4, 5]
     var after1 = [1, 6, 2, 3, 5, 4]
-    var diffExpected1 = [
-      {equal: 1},
-      {insert: [6]},
-      {equal: 2},
-      {cut: 1},
-      {equal: 1},
-      {paste: [3]}
-    ]
-    var diffRes1 = diff(before, after1)
-    assert.deepEqual(diffRes1, diffExpected1)
+    var expected = {
+      equal: [[0,1],[1,2],[4,1]],
+      insert: [[0,[6]]],
+      cut: [[3,1]],
+      paste: [[4,[3]]]
+    }
+    var result = diff(before, after1)
+    assert.deepEqual(result, expected)
 
     var after2 = [1, 2, 3, 4, 7, 5]
-    var diffExpected2 = [
-      {equal: 4},
-      {insert: [7]},
-      {equal: 1}
-    ]
-    var diffRes2 = diff(before, after2)
-    assert.deepEqual(diffRes2, diffExpected2)
+    var result = diff(before, after2)
+    var expected = {
+      equal: [ [ 0, 4 ], [ 4, 1 ] ],
+      insert: [ [ 3, [7] ] ]
+    }
+    assert.deepEqual(result, expected)
 
     var before = [1,2,3]
     var after = [5,4,3]
-    var expected = [{delete: 2}, {insert: [5, 4]}, {equal: 1}]
-    var diffRes3 = diff(before, after)
-    assert.deepEqual(diffRes3, expected)
-
-    var result = diff([1, 2, 3, 4, 5], [1, 2, 3, 4, 7, 5])
-    var expected = [{equal: 4}, {insert: [7]}, {equal: 1}]
-    assert.deepEqual(result, expected)
-
-    var result = diff([1, 2, 3, 4, 5, 6], [1, 2, 3, 6, 4, 5])
-    var expected = [{equal: 3}, {paste: [5]}, {equal: 2}, {cut: 1}]
-    assert.deepEqual(result, expected)
-  })
-  it('should transform the diff to an inverse format', function() {
-    var diff = [
-      new types.Cut(1),
-      new types.Equal(1),
-      new types.Delete(2),
-      new types.Paste([0]),
-      new types.Insert([5])
-    ]
     var expected = {
-      equal: [[1, 1]],
-      insert: [[4, [5]]],
-      delete: [[2, 2]],
-      cut: [[0, 1]],
-      paste: [[4, [0]]]
+      delete: [ [ 0, 2 ] ],
+      insert: [ [ 1, [5, 4] ] ],
+      equal: [ [ 2, 1 ] ]
     }
-    var result = invert(diff)
+    var result = diff(before, after)
+    assert.deepEqual(result, expected)
+
+    var expected = {
+      equal: [ [ 0, 4 ], [ 4, 1 ] ],
+      insert: [ [ 3, [7] ] ]
+    }
+    var result = diff([1, 2, 3, 4, 5], [1, 2, 3, 4, 7, 5])
+    assert.deepEqual(result, expected)
+
+    var expected = {
+      equal: [ [ 0, 3 ], [ 3, 2 ] ],
+      paste: [ [ 2, [5] ] ],
+      cut: [ [ 5, 1 ] ]
+    }
+    var result = diff([1, 2, 3, 4, 5, 6], [1, 2, 3, 6, 4, 5])
     assert.deepEqual(result, expected)
   })
 })
