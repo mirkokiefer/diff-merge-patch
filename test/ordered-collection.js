@@ -4,8 +4,8 @@ var assert = require('assert')
 var orderedColDiff = require('../lib/index').orderedCollections
 var invert = orderedColDiff.invert
 var types = orderedColDiff.types
-var diffSeq = orderedColDiff({unique:true})
-var diff = function(a, b) { return invert(diffSeq(a, b)) }
+var diff = orderedColDiff({unique:true})
+//var diff = function(a, b) { return invert(diffSeq(a, b)) }
 
 describe('ordered collection diff', function() {
   it('should find the position diff', function() {
