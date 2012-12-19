@@ -4,27 +4,28 @@ var diff = require('diffit').hashs
 var merge = require('../lib/index').hashs
 
 describe('hash merging', function() {
+  var before = {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4
+  }
+
+  var after1 = {
+    5: 6,
+    3: 8,
+    2: 2,
+    4: 4,
+    1: 5
+  }
+
+  var after2 = {
+    2: 2,
+    1: 9,
+    4: 5
+  }
+
   it('should do a 3-way merge', function() {
-    var before = {
-      1: 1,
-      2: 2,
-      3: 3,
-      4: 4
-    }
-
-    var after1 = {
-      5: 6,
-      3: 8,
-      2: 2,
-      4: 4,
-      1: 5
-    }
-
-    var after2 = {
-      2: 2,
-      1: 9,
-      4: 5
-    }
 
     var expected = {
       hash: {
@@ -37,6 +38,28 @@ describe('hash merging', function() {
       conflicts: [1, 3]
     }
     var result = merge(before, [diff(before, after1), diff(before, after2)])
+    assert.deepEqual(result, expected)
+  })
+  it('should test an n-way merge', function() {
+    var after3 = {
+      1: 1,
+      2: 3,
+      4: 6,
+      7: 9
+    }
+    var expected = {
+      hash: {
+        1: [5, 9],
+        2: 3,
+        3: [8, null, null],
+        4: [5, 6],
+        5: 6,
+        7: 9
+      },
+      conflicts: [1, 3, 4]
+    }
+    var diffs = [after1, after2, after3].map(function(each) { return diff(before, each) })
+    var result = merge(before, diffs)
     assert.deepEqual(result, expected)
   })
 })
