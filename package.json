@@ -1,6 +1,6 @@
 {
   "name": "diffit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "diff collections, ordered collection, key-value collections and ordered key-value collections",
   "main": "lib/index.js",
   "scripts": {
