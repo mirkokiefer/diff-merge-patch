@@ -11,10 +11,9 @@ describe('ordered collection diff', function() {
     var before = [1, 2, 3, 4]
     var after = [2, 1, 5]
     var expected = {
-      cut: [ [ 0, 1 ] ],
       equal: [ [ 1, 1 ] ],
       delete: [ [ 2, 2 ] ],
-      paste: [ [ 3, [0] ] ],
+      move: [ [ 3, [0, 1] ] ],
       insert: [ [ 3, [5] ] ]
     }
     var result = diff(before, after)
@@ -26,8 +25,7 @@ describe('ordered collection diff', function() {
     var expected = {
       equal: [[0,1],[1,2],[4,1]],
       insert: [[0,[6]]],
-      cut: [[3,1]],
-      paste: [[4,[3]]]
+      move: [[4,[3, 1]]]
     }
     var result = diff(before, after1)
     assert.deepEqual(result, expected)
@@ -59,8 +57,7 @@ describe('ordered collection diff', function() {
 
     var expected = {
       equal: [ [ 0, 3 ], [ 3, 2 ] ],
-      paste: [ [ 2, [5] ] ],
-      cut: [ [ 5, 1 ] ]
+      move: [ [ 2, [5, 1] ] ]
     }
     var result = diff([1, 2, 3, 4, 5, 6], [1, 2, 3, 6, 4, 5])
     assert.deepEqual(result, expected)
@@ -68,8 +65,14 @@ describe('ordered collection diff', function() {
     var result = diff([1, 2, 3, 4, 5, 6], [4, 5, 6, 1, 2, 3])
     var expected = {
       equal: [ [ 3, 3 ] ],
-      cut: [ [ 0, 3 ] ],
-      paste: [ [ 5, [0, 1, 2] ] ]
+      move: [ [ 5, [0, 3] ] ]
+    }
+    assert.deepEqual(result, expected)
+
+    var result = diff([1, 2, 3, 4, 5, 6], [4, 5, 3, 1, 2, 6])
+    var expected = {
+      equal: [ [ 3, 2 ], [5, 1] ],
+      move: [[4,[2,1]],[4,[0,1]],[4,[1,1]]]
     }
     assert.deepEqual(result, expected)
   })
