@@ -64,6 +64,14 @@ describe('ordered collection diff', function() {
     }
     var result = diff([1, 2, 3, 4, 5, 6], [1, 2, 3, 6, 4, 5])
     assert.deepEqual(result, expected)
+
+    var result = diff([1, 2, 3, 4, 5, 6], [4, 5, 6, 1, 2, 3])
+    var expected = {
+      equal: [ [ 3, 3 ] ],
+      cut: [ [ 0, 3 ] ],
+      paste: [ [ 5, [0, 1, 2] ] ]
+    }
+    assert.deepEqual(result, expected)
   })
 })
 
