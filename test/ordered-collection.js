@@ -123,4 +123,30 @@ describe('ordered collection merge', function() {
     var merged = mergeDiffs(diffs)
     assert.deepEqual(merged, expected)
   })
+  it('should test commutative conflict resolution', function() {
+    var result1 = {
+      "insert":[[1,[6]],[3,[7]],[0,[8]]],
+      "move":[
+        [[1,[0,1]],[4,[3,1]]],
+        [[2,[0,1]],[4,[3,1]]],
+        [[4,[3,1]]]
+      ]
+    }
+    var result2 = {
+      "insert":[[1,[6]],[3,[7]],[0,[8]]],
+      "move":[
+        [[4,[3,1]]],
+        [[2,[0,1]],[4,[3,1]]],
+        [[1,[0,1]],[4,[3,1]]]
+      ]
+    }
+    var expected = {
+      "insert":[[1,[6]],[3,[7]],[0,[8]]],
+      "move": [[1,[0,1]],[4,[3,1]]]
+    }
+    var resolvedResult1 = mergeDiffs.resolveConflicts.commutative(result1)
+    var resolvedResult2 = mergeDiffs.resolveConflicts.commutative(result2)
+    assert.deepEqual(resolvedResult1, expected)
+    assert.deepEqual(resolvedResult1, resolvedResult2)
+  })
 })
