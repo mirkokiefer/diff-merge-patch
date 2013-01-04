@@ -43,6 +43,14 @@ describe('range-map merging', function() {
           {range: [8, 8], value: 2}
         ]
       ]
+      /* this compressed form doesnt work if we have multiple equal changes with different order
+      result: [
+        {range: [1, 1], value: 1},
+        {range: [2, 3], value: [1, 5}, conflict: true},
+        {range: [4, 4], value: 5},
+        {range: [6, 7], value: [2, 3], conflict: true},
+        {range: [8, 8], value: 2},
+      ]*/
     }
     var result = merge([map1, map2])
     assert.deepEqual(result, expected)
