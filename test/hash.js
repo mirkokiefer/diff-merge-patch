@@ -62,4 +62,42 @@ describe('hash merging', function() {
     var result = merge(before, diffs)
     assert.deepEqual(result, expected)
   })
+  it('should test commutative conflict resolution', function() {
+    var result1 = {
+      hash: {
+        1: [5, 9],
+        2: 3,
+        3: [null, 8, null],
+        4: [6, 5],
+        5: 6,
+        7: 9
+      },
+      conflicts: [1, 3, 4]
+    }
+    var result2 = {
+      hash: {
+        1: [5, 9],
+        2: 3,
+        3: [8, null, null],
+        4: [5, 6],
+        5: 6,
+        7: 9
+      },
+      conflicts: [1, 3, 4]
+    }
+    var expected = {
+      hash: {
+        1: 5,
+        2: 3,
+        3: 8,
+        4: 5,
+        5: 6,
+        7: 9
+      }
+    }
+    var resolvedResult1 = merge.resolveConflicts(result1)
+    var resolvedResult2 = merge.resolveConflicts(result2)
+    assert.deepEqual(resolvedResult1, expected)
+    assert.deepEqual(resolvedResult1, resolvedResult2)
+  })
 })
