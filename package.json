@@ -1,0 +1,12 @@
+{
+  "name": "patchit",
+  "version": "0.0.1",
+  "description": "patch data by applying diff",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "author": "Mirko Kiefer <mail@mirkokiefer.com>",
+  "license": "BSD"
+}
