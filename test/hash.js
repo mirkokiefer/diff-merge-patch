@@ -2,6 +2,7 @@
 var assert = require('assert')
 var diff = require('diffit').hashs
 var merge = require('../lib/index').hashs
+var Result = merge.Result
 
 describe('hash merging', function() {
   var before = {
@@ -63,7 +64,7 @@ describe('hash merging', function() {
     assert.deepEqual(result, expected)
   })
   it('should test commutative conflict resolution', function() {
-    var result1 = {
+    var result1 = new Result({
       hash: {
         1: [5, 9],
         2: 3,
@@ -73,8 +74,8 @@ describe('hash merging', function() {
         7: 9
       },
       conflicts: [1, 3, 4]
-    }
-    var result2 = {
+    })
+    var result2 = new Result({
       hash: {
         1: [5, 9],
         2: 3,
@@ -84,7 +85,7 @@ describe('hash merging', function() {
         7: 9
       },
       conflicts: [1, 3, 4]
-    }
+    })
     var expected = {
       hash: {
         1: 5,
@@ -95,8 +96,8 @@ describe('hash merging', function() {
         7: 9
       }
     }
-    var resolvedResult1 = merge.resolveConflicts(result1)
-    var resolvedResult2 = merge.resolveConflicts(result2)
+    var resolvedResult1 = result1.resolveConflicts()
+    var resolvedResult2 = result2.resolveConflicts()
     assert.deepEqual(resolvedResult1, expected)
     assert.deepEqual(resolvedResult1, resolvedResult2)
   })
