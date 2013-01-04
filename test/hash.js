@@ -2,7 +2,7 @@
 var assert = require('assert')
 var patch = require('../lib/index').hash
 
-describe('patching', function() {
+describe('hash patching', function() {
   it('should apply a diff as a patch', function() {
     var before = {
       1: 1,
