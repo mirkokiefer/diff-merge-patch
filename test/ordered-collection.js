@@ -45,23 +45,44 @@ describe('ordered collection merge', function() {
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
   })
-  /*it('should merge with conflicts', function() {
+  it('should merge with conflicts', function() {
     var origin = [1, 2, 3, 4, 5]
     var modified1 = [2, 6, 1, 3, 5, 4]
     var modified2 = [2, 3, 1, 4, 7, 5]
-    console.log(diff(origin, modified1).move, '#', diff(origin, modified2).move)
-    var expected = {conflict:true, result:[[2, 6, 1, 3, 7, 5, 4], [2, 6, 3, 1, 7, 5, 4]]}
+    //var expected = {conflict:true, result:[[2, 6, 1, 3, 7, 5, 4], [2, 6, 3, 1, 7, 5, 4]]}
+    var expected = {
+      conflict: true,
+      result: {
+        insert: [[1,[6]],[3,[7]]],
+        move: [
+          [[1,[0,1]],[4,[3,1]]],
+          [[2,[0,1]],[4,[3,1]]]
+        ]
+      }
+    }
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
 
     var origin = [1, 2, 3, 4, 5]
     var modified1 = [2, 6, 1, 5, 4, 3]
     var modified2 = [2, 4, 1, 7, 3, 5]
-    var expected = {conflict:true, result:[[2, 6, 1, 7, 5, 4, 3], [2, 6, 1, 7, 3, 5, 4]]}
+    //var expected = {conflict:true, result:[[2, 6, 1, 7, 5, 4, 3], [2, 6, 1, 7, 3, 5, 4]]}
+    var expected = {
+      conflict: true,
+      result: {
+        insert: [[3,[6]], [3,[7]]],
+        move: [
+          [[3,[0,1]], [4,[3,1]], [4,[2,1]]],
+          [[3,[0,1]], [3,[2,1]], [4,[3,1]]]
+        ]
+      }
+    }
     var merged = merge(origin, modified1, modified2)
+    console.log(JSON.stringify(merged))
+
     assert.deepEqual(merged, expected)
   })
-  it('should merge with deletes', function() {
+  /*it('should merge with deletes', function() {
     var origin = [1, 2, 3, 4, 5]
     var modified1 = [1, 2, 5, 4]
     var modified2 = [2, 3, 1, 4, 5]
