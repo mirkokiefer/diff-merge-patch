@@ -46,7 +46,8 @@ describe('range-map merging', function() {
     }
     var result = merge([map1, map2])
     assert.deepEqual(result, expected)
-
+  })
+  it ('should merge preserving relative order', function() {
     var map1 = [
       { range: [ 0, 0 ], value: 3 },
       { range: [ 3, 3 ], value: 4 },
@@ -60,7 +61,8 @@ describe('range-map merging', function() {
       conflict: true,
       result: [[
           { range: [ 0, 0 ], value: 3 },
-          { range: [ 2, 3 ], value: 4 }
+          { range: [ 3, 3 ], value: 4 },
+          { range: [ 2, 2 ], value: 4 }
         ], [
           { range: [ 0, 0 ], value: 3 },
           { range: [ 2, 2 ], value: 3 },
