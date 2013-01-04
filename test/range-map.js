@@ -46,6 +46,29 @@ describe('range-map merging', function() {
     }
     var result = merge([map1, map2])
     assert.deepEqual(result, expected)
+
+    var map1 = [
+      { range: [ 0, 0 ], value: 3 },
+      { range: [ 3, 3 ], value: 4 },
+      { range: [ 2, 2 ], value: 4 }
+    ]
+    var map2 = [
+      { range: [ 0, 0 ], value: 3 },
+      { range: [ 2, 2 ], value: 3 }
+    ]
+    var expected = {
+      conflict: true,
+      result: [[
+          { range: [ 0, 0 ], value: 3 },
+          { range: [ 2, 3 ], value: 4 }
+        ], [
+          { range: [ 0, 0 ], value: 3 },
+          { range: [ 2, 2 ], value: 3 },
+          { range: [ 3, 3 ], value: 4 }
+      ]]
+    }
+    var result = merge([map1, map2])
+    assert.deepEqual(result, expected)
   })
   it ('should merge with three range-maps', function() {
     var map1 = [
