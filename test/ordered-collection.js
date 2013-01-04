@@ -88,7 +88,7 @@ describe('ordered collection merge', function() {
     var expected = {"result":{"move":[[2,[0,1]],[4,[3,1]]],"delete":[[2,1]]}}
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
-  })/*
+  })
   it('should do a n-way merge with conflicts', function() {
     var o = [1, 2, 3, 4, 5]
     var changes = [
@@ -97,9 +97,21 @@ describe('ordered collection merge', function() {
       [1, 2, 3, 4, 5],
       [1, 8, 2, 3, 4, 5]
     ]
-    var expected = {"conflict":true,"result":[[8,2,6,1,3,7,5,4],[8,2,6,3,1,7,5,4],[1,8,2,6,3,7,5,4],[1,8,2,6,3,7,5,4]]}
+    //var expected = {"conflict":true,"result":[[8,2,6,1,3,7,5,4],[8,2,6,3,1,7,5,4],[1,8,2,6,3,7,5,4],[1,8,2,6,3,7,5,4]]}
+    var expected = {
+      "conflict":true,
+      "result":{
+        "insert":[[1,[6]],[3,[7]],[0,[8]]],
+        "move":[
+          [[1,[0,1]],[4,[3,1]]],
+          [[2,[0,1]],[4,[3,1]]],
+          [[4,[3,1]]],
+          [[4,[3,1]]]
+        ]
+      }
+    }
     var diffs = changes.map(function(each) { return diff(o, each) })
     var merged = mergeDiffs(diffs)
     assert.deepEqual(merged, expected)
-  })*/
+  })
 })
