@@ -12,9 +12,11 @@ describe('hash patching', function() {
     }
 
     var diff1 = {
-      insert: {5: 6},
-      update: {1: 5, 3: 8},
-      delete: []
+      diff: {
+        5: 6,
+        1: 5,
+        3: 8
+      }
     }
 
     var expected1 = {
@@ -29,9 +31,11 @@ describe('hash patching', function() {
     assert.deepEqual(result, expected1)
 
     var diff2 = {
-      insert: {},
-      update: {1: 9, 4: 5},
-      delete: [3]
+      diff: {
+        1: 9,
+        4: 5,
+        3: null
+      }
     }
 
     var expected2 = {
