@@ -24,14 +24,18 @@ var after2 = {
 }
 
 var expectedDiff1 = {
-  insert: {5: 6},
-  update: {1: 5, 3: 8},
-  delete: []
+  diff: {
+    5: 6,
+    1: 5,
+    3: 8
+  }
 }
 var expectedDiff2 = {
-  insert: {},
-  update: {1: 9, 4: 5},
-  delete: [3]
+  diff: {
+    1: 9,
+    4: 5,
+    3: null
+  }
 }
 
 describe('key-value collection diff', function() {
