@@ -25,5 +25,14 @@ describe('collection patching', function() {
     var diff = { insert: [], delete: [ 3, 4 ] }
     var result = patch(before, diff)
     assert.deepEqual(result, after)
+
+    var before = [1,2,3,3,4]
+    var diff = {
+      insert: [5],
+      delete: [3, 4]
+    }
+    var expected = [1, 2, 3, 5]
+    var result = patch(before, diff)
+    assert.deepEqual(result, expected)
   })
 })
