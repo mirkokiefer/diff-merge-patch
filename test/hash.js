@@ -35,7 +35,7 @@ describe('hash merging', function() {
         4: 5,
         5: 6
       },
-      conflicts: [1, 3]
+      conflict: [1, 3]
     }
     var result = merge([diff(before, after1), diff(before, after2)])
     assert.deepEqual(result, expected)
@@ -56,7 +56,7 @@ describe('hash merging', function() {
         5: 6,
         7: 9
       },
-      conflicts: [1, 3, 4]
+      conflict: [1, 3, 4]
     }
     var diffs = [after1, after2, after3].map(function(each) { return diff(before, each) })
     var result = merge(diffs)
@@ -72,7 +72,7 @@ describe('hash merging', function() {
         5: 6,
         7: null
       },
-      conflicts: [1, 3, 4]
+      conflict: [1, 3, 4]
     })
     var result2 = new Result({
       diff: {
@@ -83,7 +83,7 @@ describe('hash merging', function() {
         5: 6,
         7: null
       },
-      conflicts: [1, 3, 4]
+      conflict: [1, 3, 4]
     })
     var expected = {
       diff: {
