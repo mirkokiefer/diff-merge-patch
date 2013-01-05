@@ -29,16 +29,15 @@ describe('hash merging', function() {
   it('should do a 3-way merge', function() {
 
     var expected = {
-      hash: {
+      diff: {
         1: [5, 9],
-        2: 2,
         3: [8, null],
         4: 5,
         5: 6
       },
       conflicts: [1, 3]
     }
-    var result = merge(before, [diff(before, after1), diff(before, after2)])
+    var result = merge([diff(before, after1), diff(before, after2)])
     assert.deepEqual(result, expected)
   })
   it('should test an n-way merge', function() {
@@ -49,7 +48,7 @@ describe('hash merging', function() {
       7: 9
     }
     var expected = {
-      hash: {
+      diff: {
         1: [5, 9],
         2: 3,
         3: [8, null, null],
@@ -60,40 +59,40 @@ describe('hash merging', function() {
       conflicts: [1, 3, 4]
     }
     var diffs = [after1, after2, after3].map(function(each) { return diff(before, each) })
-    var result = merge(before, diffs)
+    var result = merge(diffs)
     assert.deepEqual(result, expected)
   })
   it('should test commutative conflict resolution', function() {
     var result1 = new Result({
-      hash: {
+      diff: {
         1: [5, 9],
         2: 3,
         3: [null, 8, null],
         4: [6, 5],
         5: 6,
-        7: 9
+        7: null
       },
       conflicts: [1, 3, 4]
     })
     var result2 = new Result({
-      hash: {
+      diff: {
         1: [5, 9],
         2: 3,
         3: [8, null, null],
         4: [5, 6],
         5: 6,
-        7: 9
+        7: null
       },
       conflicts: [1, 3, 4]
     })
     var expected = {
-      hash: {
+      diff: {
         1: 5,
         2: 3,
         3: 8,
         4: 5,
         5: 6,
-        7: 9
+        7: null
       }
     }
     var resolvedResult1 = result1.resolveConflicts()
