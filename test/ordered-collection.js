@@ -18,7 +18,7 @@ describe('ordered collection merge', function() {
     var modified1 = [1, 6, 2, 3, 5, 4]
     var modified2 = [1, 2, 3, 4, 7, 5]
     //var expected = {changes: [1, 6, 2, 3, 7, 5, 4]}
-    var expected = {"changes":{"move":[[4,[3,1]]],"insert":[[0,[6]],[3,[7]]]}}
+    var expected = {"move":[[4,[3,1]]],"insert":[[0,[6]],[3,[7]]]}
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
 
@@ -26,7 +26,7 @@ describe('ordered collection merge', function() {
     var modified1 = [1, 2, 6, 3, 4, 5]
     var modified2 = [1, 2, 3, 4, 7, 5]
     //var expected = {changes: [1, 2, 6, 3, 4, 7, 5]}
-    var expected = {"changes":{"insert":[[1,[6]],[3,[7]]]}}
+    var expected = {"insert":[[1,[6]],[3,[7]]]}
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
 
@@ -34,7 +34,7 @@ describe('ordered collection merge', function() {
     var modified1 = [2, 1, 3]
     var modified2 = [1, 2, 4]
     //var expected = {changes: [2, 4, 1, 3]}
-    var expected = {"changes":{"move":[[1,[0,1]]],"insert":[[1,[3]],[1,[4]]]}}
+    var expected = {"move":[[1,[0,1]]],"insert":[[1,[3]],[1,[4]]]}
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
 
@@ -42,7 +42,7 @@ describe('ordered collection merge', function() {
     var modified1 = [1, 2, 7, 3, 4, 5, 6]
     var modified2 = [1, 6, 2, 3, 4, 5, 7]
     //var expected = {changes: [1, 6, 2, 7, 3, 4, 5]}
-    var expected = {"changes":{"move":[[0,[5,1]],[1,[6,1]]]}}
+    var expected = {"move":[[0,[5,1]],[1,[6,1]]]}
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
   })
@@ -53,13 +53,11 @@ describe('ordered collection merge', function() {
     //var expected = {conflict:true, changes:[[2, 6, 1, 3, 7, 5, 4], [2, 6, 3, 1, 7, 5, 4]]}
     var expected = {
       conflict: true,
-      changes: {
-        insert: [[1,[6]],[3,[7]]],
-        move: [
-          [[1,[0,1]],[4,[3,1]]],
-          [[2,[0,1]],[4,[3,1]]]
-        ]
-      }
+      insert: [[1,[6]],[3,[7]]],
+      move: [
+        [[1,[0,1]],[4,[3,1]]],
+        [[2,[0,1]],[4,[3,1]]]
+      ]
     }
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
@@ -70,13 +68,11 @@ describe('ordered collection merge', function() {
     //var expected = {conflict:true, changes:[[2, 6, 1, 7, 5, 4, 3], [2, 6, 1, 7, 3, 5, 4]]}
     var expected = {
       conflict: true,
-      changes: {
-        insert: [[3,[6]], [3,[7]]],
-        move: [
-          [[3,[0,1]], [4,[3,1]], [4,[2,1]]],
-          [[3,[0,1]], [3,[2,1]], [4,[3,1]]]
-        ]
-      }
+      insert: [[3,[6]], [3,[7]]],
+      move: [
+        [[3,[0,1]], [4,[3,1]], [4,[2,1]]],
+        [[3,[0,1]], [3,[2,1]], [4,[3,1]]]
+      ]
     }
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
@@ -86,7 +82,7 @@ describe('ordered collection merge', function() {
     var modified1 = [1, 2, 5, 4]
     var modified2 = [2, 3, 1, 4, 5]
     //var expected = {changes: [2, 1, 5, 4]}
-    var expected = {"changes":{"move":[[2,[0,1]],[4,[3,1]]],"delete":[[2,1]]}}
+    var expected = {"move":[[2,[0,1]],[4,[3,1]]],"delete":[[2,1]]}
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
   })
@@ -95,7 +91,7 @@ describe('ordered collection merge', function() {
     var modified1 = [1, 2, 3, 4]
     var modified2 = [5, 1, 2, 3, 4]
     //var expected = {changes: [2, 1, 5, 4]}
-    var expected = {"conflict":true,"changes":{"move":[[],[[-1,[4,1]]]],"delete":[[[4,1]],[]]}}
+    var expected = {"conflict":true, "move":[[],[[-1,[4,1]]]],"delete":[[[4,1]],[]]}
     var merged = merge(origin, modified1, modified2)
     assert.deepEqual(merged, expected)
   })
@@ -110,15 +106,13 @@ describe('ordered collection merge', function() {
     //var expected = {"conflict":true,"changes":[[8,2,6,1,3,7,5,4],[8,2,6,3,1,7,5,4],[1,8,2,6,3,7,5,4],[1,8,2,6,3,7,5,4]]}
     var expected = {
       "conflict":true,
-      "changes":{
-        "insert":[[1,[6]],[3,[7]],[0,[8]]],
-        "move":[
-          [[1,[0,1]],[4,[3,1]]],
-          [[2,[0,1]],[4,[3,1]]],
-          [[4,[3,1]]],
-          [[4,[3,1]]]
-        ]
-      }
+      "insert":[[1,[6]],[3,[7]],[0,[8]]],
+      "move":[
+        [[1,[0,1]],[4,[3,1]]],
+        [[2,[0,1]],[4,[3,1]]],
+        [[4,[3,1]]],
+        [[4,[3,1]]]
+      ]
     }
     var diffs = changes.map(function(each) { return diff(o, each) })
     var merged = mergeDiffs(diffs)
@@ -126,32 +120,26 @@ describe('ordered collection merge', function() {
   })
   it('should test commutative conflict resolution', function() {
     var changes1 = new Result({
-      changes: {
-        "insert":[[1,[6]],[3,[7]],[0,[8]]],
-        "move":[
-          [[1,[0,1]],[4,[3,1]]],
-          [[2,[0,1]],[4,[3,1]]],
-          [[4,[3,1]]]
-        ]
-      },
+      "insert":[[1,[6]],[3,[7]],[0,[8]]],
+      "move":[
+        [[1,[0,1]],[4,[3,1]]],
+        [[2,[0,1]],[4,[3,1]]],
+        [[4,[3,1]]]
+      ],
       conflict: true
     })
     var changes2 = new Result({
-      changes: {
-        "insert":[[1,[6]],[3,[7]],[0,[8]]],
-        "move":[
-          [[4,[3,1]]],
-          [[2,[0,1]],[4,[3,1]]],
-          [[1,[0,1]],[4,[3,1]]]
-        ]
-      },
+      "insert":[[1,[6]],[3,[7]],[0,[8]]],
+      "move":[
+        [[4,[3,1]]],
+        [[2,[0,1]],[4,[3,1]]],
+        [[1,[0,1]],[4,[3,1]]]
+      ],
       conflict: true
     })
     var expected = {
-      changes: {
-        "insert":[[1,[6]],[3,[7]],[0,[8]]],
-        "move": [[1,[0,1]],[4,[3,1]]]
-      }
+      "insert":[[1,[6]],[3,[7]],[0,[8]]],
+      "move": [[1,[0,1]],[4,[3,1]]]
     }
     var resolvedResult1 = changes1.resolveConflicts()
     var resolvedResult2 = changes2.resolveConflicts()
