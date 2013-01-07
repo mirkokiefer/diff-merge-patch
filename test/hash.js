@@ -1,6 +1,7 @@
 
 var assert = require('assert')
 var diff = require('../lib/index').hashs
+var Result = diff.Result
 
 var before = {
   1: 1,
@@ -45,5 +46,29 @@ describe('key-value collection diff', function() {
 
     var result2 = diff(before, after2)
     assert.deepEqual(result2, expectedDiff2)
+  })
+  it('should compute the difference of two diffs', function() {
+    var diff1 = new Result({
+      diff: {
+        1: 3,
+        2: 4,
+        6: 7
+      }
+    })
+    var diff2 = {
+      diff: {
+        1: 3,
+        2: 5,
+        5: 6
+      }
+    }
+    var expected = {
+      diff: {
+        2: 4,
+        6: 7
+      }
+    }
+    var result = diff1.difference(diff2)
+    assert.deepEqual(result, expected)
   })
 })
