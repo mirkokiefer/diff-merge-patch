@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var diff = require('../lib/index').orderedCollections({unique:true})
+var diff = require('../../lib/diff/index').orderedCollections({unique:true})
 
 describe('ordered collection diff', function() {
   it('should find the position diff', function() {

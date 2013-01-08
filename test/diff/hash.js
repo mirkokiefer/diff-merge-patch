@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var diff = require('../lib/index').hashs
+var diff = require('../../lib/diff/index').hashs
 var Result = diff.Result
 
 var before = {

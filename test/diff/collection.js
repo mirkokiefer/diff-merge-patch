@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var diff = require('../lib/index').collections
+var diff = require('../../lib/diff/index').collections
 var Result = diff.Result
 
 describe('collection diff', function() {
