@@ -1,7 +1,7 @@
 
 var assert = require('assert')
 var diff = require('diffit').orderedCollections({unique:true})
-var mergeDiffs = require('../lib/index').orderedCollections
+var mergeDiffs = require('../../lib/merge/index').orderedCollections
 var Result = mergeDiffs.Result
 
 var merge = function(origin, modified1, modified2) {

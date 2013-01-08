@@ -1,7 +1,7 @@
 
 var assert = require('assert')
 var diff = require('diffit').hashs
-var merge = require('../lib/index').hashs
+var merge = require('../../lib/merge/index').hashs
 var Result = merge.Result
 
 describe('hash merging', function() {

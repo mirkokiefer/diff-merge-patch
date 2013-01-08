@@ -1,7 +1,7 @@
 
 var assert = require('assert')
 var diff = require('diffit').collections
-var merge = require('../lib/index').collections
+var merge = require('../../lib/merge/index').collections
 
 describe('collection merging', function() {
   it('should do a 3-way merge', function() {
