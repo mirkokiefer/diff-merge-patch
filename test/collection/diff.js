@@ -27,20 +27,4 @@ describe('collection diff', function() {
     var result = diff(before, after)
     assert.deepEqual(result, expected)
   })
-  it('should compute the difference of two diffs', function() {
-    var diff1 = new Result({
-      insert: [5, 6, 6],
-      delete: [2, 3]
-    })
-    var diff2 = {
-      insert: [6, 7],
-      delete: [2]
-    }
-    var expected = {
-      insert: [5, 6],
-      delete: [3]
-    }
-    var result = diff1.difference(diff2)
-    assert.deepEqual(result, expected)
-  })
 })
