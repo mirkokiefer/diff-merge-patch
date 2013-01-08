@@ -6,9 +6,6 @@
   "scripts": {
     "test": "mocha test/*"
   },
-  "repository": "",
-  "author": "Mirko Kiefer <mail@mirkokiefer.com>",
-  "license": "BSD",
   "dependencies": {
     "underscore": "~1.4.3",
     "longest-common-substring": "0.0.1"
