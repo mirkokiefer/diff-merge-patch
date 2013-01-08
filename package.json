@@ -1,0 +1,12 @@
+{
+  "name": "patch-diff",
+  "version": "0.0.1",
+  "description": "diff and patch collections, hashs and ordered collections",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha test/*"
+  },
+  "repository": "",
+  "author": "Mirko Kiefer <mail@mirkokiefer.com>",
+  "license": "BSD"
+}
