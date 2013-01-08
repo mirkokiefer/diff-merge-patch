@@ -1,52 +1,19 @@
 
 var assert = require('assert')
-var diff = require('../../lib/index').hash.diff
 var merge = require('../../lib/index').hash.merge
 var Result = merge.Result
+var testData = require('./test-data')
 
 describe('hash merging', function() {
-  var before = {
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4
-  }
-
-  var after1 = {
-    5: 6,
-    3: 8,
-    2: 2,
-    4: 4,
-    1: 5
-  }
-
-  var after2 = {
-    2: 2,
-    1: 9,
-    4: 5
-  }
+  var before = testData[0].before
+  var diffs = testData[0].diffs
 
   it('should do a 3-way merge', function() {
-
-    var expected = {
-      diff: {
-        1: [5, 9],
-        3: [8, null],
-        4: 5,
-        5: 6
-      },
-      conflict: [1, 3]
-    }
-    var result = merge([diff(before, after1), diff(before, after2)])
-    assert.deepEqual(result, expected)
+    var result = merge(diffs)
+    assert.deepEqual(result, testData[0].diffsMerged)
   })
   it('should test an n-way merge', function() {
-    var after3 = {
-      1: 1,
-      2: 3,
-      4: 6,
-      7: 9
-    }
+    var diff3 = { diff: { '2': 3, '3': null, '4': 6, '7': 9 } }
     var expected = {
       diff: {
         1: [5, 9],
@@ -58,8 +25,7 @@ describe('hash merging', function() {
       },
       conflict: [1, 3, 4]
     }
-    var diffs = [after1, after2, after3].map(function(each) { return diff(before, each) })
-    var result = merge(diffs)
+    var result = merge(diffs.concat(diff3))
     assert.deepEqual(result, expected)
   })
   it('should test commutative conflict resolution', function() {
