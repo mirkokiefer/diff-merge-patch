@@ -1,9 +1,9 @@
 
 var assert = require('assert')
-var patch = require('../../lib/index').hash.patch
+var patch = require('../../lib/index').object.patch
 var testData = require('./test-data')
 
-describe('hash patching', function() {
+describe('object patching', function() {
   it('should apply a diff as a patch', function() {
     testData.forEach(function(each) {
       each.diffs.forEach(function(eachDiff, i) {

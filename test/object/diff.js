@@ -1,11 +1,11 @@
 
 var assert = require('assert')
-var diff = require('../../lib/index').hash.diff
+var diff = require('../../lib/index').object.diff
 var Result = diff.Result
 var testData = require('./test-data')
 
-describe('key-value collection diff', function() {
-  it('should find all added/deleted keys + value changes', function() {
+describe('object diff', function() {
+  it('should find all changes', function() {
     testData.forEach(function(each) {
       each.after.forEach(function(eachAfter, i) {
         var result = diff(each.before, eachAfter)

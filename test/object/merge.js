@@ -1,10 +1,10 @@
 
 var assert = require('assert')
-var merge = require('../../lib/index').hash.merge
+var merge = require('../../lib/index').object.merge
 var Result = merge.Result
 var testData = require('./test-data')
 
-describe('hash merging', function() {
+describe('object merging', function() {
   var before = testData[0].before
   var diffs = testData[0].diffs
 

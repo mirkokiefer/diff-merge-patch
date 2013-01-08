@@ -1,8 +1,8 @@
 
 var assert = require('assert')
-var patch = require('../../lib/index').orderedCollection.patch
+var patch = require('../../lib/index').array.patch
 
-describe('ordered-collection patching', function() {
+describe('array patching', function() {
   it('should apply a diff', function() {
     var before = [1, 2, 3, 4]
     var after = [2, 1, 5]

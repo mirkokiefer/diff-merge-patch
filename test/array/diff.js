@@ -1,9 +1,9 @@
 
 var assert = require('assert')
-var diff = require('../../lib/index').orderedCollection.diff({unique:true})
+var diff = require('../../lib/index').array.diff({unique:true})
 var testData = require('./test-data')
 
-describe('ordered collection diff', function() {
+describe('array diff', function() {
   it('should find the position diff', function() {
     testData.forEach(function(each, j) {
       each.after.forEach(function(eachAfter, i) {
@@ -13,7 +13,7 @@ describe('ordered collection diff', function() {
     })
   })
   it('should do a non-set diff', function() {
-    var diff = require('../../lib/index').orderedCollection.diff({unique:false})
+    var diff = require('../../lib/index').array.diff({unique:false})
 
     var before = 'this is just a test sentece - let\'s see how it works.'
     var after = 'Hi! This is just a test sentence - let\'s see if it works.'

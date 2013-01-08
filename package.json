@@ -1,7 +1,7 @@
 {
   "name": "patch-diff",
   "version": "0.1.0",
-  "description": "diff and patch collections, hashs and ordered collections",
+  "description": "diff and patch collections, objects and arrays",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha test/*"

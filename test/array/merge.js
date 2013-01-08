@@ -1,11 +1,11 @@
 
 var assert = require('assert')
-var diff = require('../../lib/index').orderedCollection.diff({unique:true})
-var merge = require('../../lib/index').orderedCollection.merge
+var diff = require('../../lib/index').array.diff({unique:true})
+var merge = require('../../lib/index').array.merge
 var Result = merge.Result
 var testData = require('./test-data')
 
-describe('ordered collection merge', function() {
+describe('array merge', function() {
   it('should merge diffs', function() {
     testData.forEach(function(each) {
       var result = merge(each.diffs)
