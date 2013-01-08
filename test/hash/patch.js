@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var patch = require('../../lib/patch/index').hash
+var patch = require('../../lib/index').hash.patch
 
 describe('hash patching', function() {
   it('should apply a diff as a patch', function() {

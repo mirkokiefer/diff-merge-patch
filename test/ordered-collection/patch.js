@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var patch = require('../../lib/patch/index').orderedCollection
+var patch = require('../../lib/index').orderedCollection.patch
 
 describe('ordered-collection patching', function() {
   it('should apply a diff', function() {

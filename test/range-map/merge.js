@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var merge = require('../../lib/merge/range-map')
+var merge = require('../../lib/index').rangeMap.merge
 
 describe('range-map merging', function() {
   it ('should merge without conflicts', function() {
