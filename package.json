@@ -1,6 +1,6 @@
 {
   "name": "patch-diff",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "diff and patch collections, hashs and ordered collections",
   "main": "lib/index.js",
   "scripts": {
