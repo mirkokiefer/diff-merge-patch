@@ -13,15 +13,15 @@ describe('object merging', function() {
     assert.deepEqual(result, testData[0].diffsMerged)
   })
   it('should test an n-way merge', function() {
-    var diff3 = { diff: { '2': 3, '3': null, '4': 6, '7': 9 } }
+    var diff3 = { diff: { '2': {value: 3}, '3': {value: null}, '4': {value: 6}, '7': {value: 9} } }
     var expected = {
       diff: {
-        1: [5, 9],
-        2: 3,
-        3: [8, null, null],
-        4: [5, 6],
-        5: 6,
-        7: 9
+        1: [{value: 5, source: [0]}, {value: 9, source: [1]}],
+        2: {value: 3, source: [2]},
+        3: [{value: 8, source: [0]}, {value: null, source: [1, 2]}],
+        4: [{value: 5, source: [1]}, {value: 6, source: [2]}],
+        5: {value: 6, source: [0]},
+        7: {value: 9, source: [2]}
       },
       conflict: [1, 3, 4]
     }
@@ -31,34 +31,34 @@ describe('object merging', function() {
   it('should test commutative conflict resolution', function() {
     var result1 = new Result({
       diff: {
-        1: [5, 9],
-        2: 3,
-        3: [null, 8, null],
-        4: [6, 5],
-        5: 6,
-        7: null
+        1: [{value: 5, source: [0]}, {value: 9, source: [1]}],
+        2: {value: 3, source: [0, 1]},
+        3: [{value: null, source: [0, 1]}, {value: 8, source: [1]}],
+        4: [{value: 6, source: [1]}, {value: 5, source: [0]}],
+        5: {value: 6, source: [2]},
+        7: {value: null, source: [0]}
       },
       conflict: [1, 3, 4]
     })
     var result2 = new Result({
       diff: {
-        1: [5, 9],
-        2: 3,
-        3: [8, null, null],
-        4: [5, 6],
-        5: 6,
-        7: null
+        1: [{value: 9, source: [1]}, {value: 5, source: [0]}],
+        2: {value: 3, source: [0, 1]},
+        3: [{value: null, source: [0, 1]}, {value: 8, source: [1]}],
+        4: [{value: 5, source: [0]}, {value: 6, source: [1]}],
+        5: {value: 6, source: [2]},
+        7: {value: null, source: [0]}
       },
       conflict: [1, 3, 4]
     })
     var expected = {
       diff: {
-        1: 5,
-        2: 3,
-        3: 8,
-        4: 5,
-        5: 6,
-        7: null
+        1: {value: 5, source: [0]},
+        2: {value: 3, source: [0, 1]},
+        3: {value: 8, source: [1]},
+        4: {value: 5, source: [0]},
+        5: {value: 6, source: [2]},
+        7: {value: null, source: [0]}
       }
     }
     var resolvedResult1 = result1.resolveConflicts()

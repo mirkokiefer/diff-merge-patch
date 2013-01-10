@@ -8,13 +8,18 @@ module.exports = [
     ],
     diffs: [
       {
-        diff: {5: 6, 1: 5, 3: 8}
+        diff: {5: {value: 6}, 1: {value: 5}, 3: {value: 8}}
       }, {
-        diff: {1: 9, 4: 5, 3: null}
+        diff: {1: {value: 9}, 4: {value: 5}, 3: {value: null}}
       }
     ],
     diffsMerged: {
-      diff: {1: [5, 9], 3: [8, null], 4: 5, 5: 6},
+      diff: {
+        1: [{value: 5, source: [0]}, {value: 9, source: [1]}],
+        3: [{value: 8, source: [0]}, {value: null, source: [1]}],
+        4: {value: 5, source: [1]},
+        5: {value: 6, source: [0]}
+      },
       conflict: [1, 3]
     }
   }
