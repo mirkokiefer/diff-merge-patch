@@ -91,7 +91,7 @@ module.exports = [
       ],
       conflict: 1
     }
-  }/*, {
+  }, {
     //test deletes:
     before: [1, 2, 3, 4, 5],
     after: [
@@ -99,10 +99,22 @@ module.exports = [
       [2, 3, 1, 4, 5]
     ],
     diffs: [
-      {"delete":[[2,1]],"move":[[4,[3,1]]]},
-      {"move":[[2,[0,1]]]}
+      {
+        diff: [
+          [null, [{move: 2}]],
+          [4, [{move: 3}]]
+        ]
+      }, {
+        diff: [[2, [{move: 0}]]]
+      }
     ],
-    diffsMerged: {"move":[[2,[0,1]],[4,[3,1]]],"delete":[[2,1]]}
+    diffsMerged: {
+      diff: [
+        [null, [{move: 2, source: [0]}]],
+        [2, [{move: 0, source: [1]}]],
+        [4, [{move: 3, source: [0]}]]
+      ]
+    }
   }, {
     // test delete conflicts:
     before: [1, 2, 3, 4, 5],
@@ -111,11 +123,24 @@ module.exports = [
       [5, 1, 2, 3, 4]
     ],
     diffs: [
-      {"delete":[[4,1]]},
-      {"move":[[-1,[4,1]]]}
+      {
+        diff: [
+          [null, [{move: 4}]]
+        ]
+      }, {
+        diff: [
+          [-1, [{move: 4}]]
+        ]
+      }
     ],
-    diffsMerged: {"conflict":true, "move":[[],[[-1,[4,1]]]],"delete":[[[4,1]],[]]}
-  }, {
+    diffsMerged: {
+      diff: [
+        [-1, [{move: 4, conflict: 1, source: [1]}]],
+        [null, [{move: 4, conflict: 1, source: [0]}]]
+      ],
+      conflict: 1
+    }
+  }/*, {
     before: [1, 2, 3, 4, 5, 6],
     after: [
       [1, 2, 3, 6, 4, 5],
