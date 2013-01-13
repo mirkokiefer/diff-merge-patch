@@ -5,14 +5,14 @@ var Result = merge.Result
 var testData = require('./test-data')
 
 describe('object merging', function() {
-  var before = testData[0].before
-  var diffs = testData[0].diffs
-
   it('should do a 3-way merge', function() {
-    var result = merge(diffs)
-    assert.deepEqual(result, testData[0].diffsMerged)
+    testData.forEach(function(each) {
+      var result = merge([each.diffs[0], each.diffs[1]])
+      assert.deepEqual(result, each.diffsMerged)
+    })
   })
   it('should test an n-way merge', function() {
+    var diffs = testData[0].diffs
     var diff3 = { diff: { '2': {value: 3}, '3': {value: null}, '4': {value: 6}, '7': {value: 9} } }
     var expected = {
       diff: {
