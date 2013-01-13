@@ -7,12 +7,12 @@ module.exports = [
       [1, 2, 3, 3, 4, 9]
     ],
     diffs: [
-      {insert: [5, 6, 6], delete: [2, 3]},
-      {insert: [9], delete: [5]}
+      {insert: [{value: 5}, {value: 6}, {value: 6}], delete: [{index: 2}, {index: 3}]},
+      {insert: [{value: 9}], delete: [{index: 5}]}
     ],
     diffsMerged: {
-      insert: [5, 6, 6, 9],
-      delete: [2, 3, 5]
+      insert: [{value: 5, source: [0]}, {value: 6, source: [0]}, {value: 6, source: [0]}, {value: 9, source: [1]}],
+      delete: [{index: 2, source: [0]}, {index: 3, source: [0]}, {index: 5, source: [1]}]
     }
   }, {
     before: [1,2,3,3,4],
@@ -22,14 +22,14 @@ module.exports = [
     ],
     diffs: [
       {
-        insert: [ 5 ], delete: [ 2, 3 ]
+        insert: [ {value: 5} ], delete: [ {index: 2}, {index: 3} ]
       }, {
-        delete: [ 3, 4 ]
+        delete: [ {index: 3}, {index: 4} ]
       }
     ],
     diffsMerged: {
-      insert: [5],
-      delete: [2, 3, 4]
+      insert: [{value: 5, source: [0]}],
+      delete: [{value: 2, source: [0]}, {value: 3, source: [0, 1]}, {value: 4, source: [1]}]
     }
   }
 ]
