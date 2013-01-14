@@ -1,7 +1,7 @@
 #diff-merge-patch
 For sets, ordered lists and dictionaries this library gives you the following functions:
 
-- diff(old, new) - returns you all changes in new since old
+- diff(before, after) - returns you all changes in new since old
 - merge(diffs) - merges multiple diffs on the same base object identifying all conflicts
 - patch(old, diff) - patches an object using a (merged) diff
 
@@ -9,9 +9,9 @@ For sets, ordered lists and dictionaries this library gives you the following fu
 Sets are represented as JavasScript Arrays:
 
 ``` js
-var old = [1, 2, 3, 4]
-var new1 = [1, 2, 4, 5, 6]
-var new2 = [1, 2, 3, 4, 5, 7]
+var before = [1, 2, 3, 4]
+var after1 = [1, 2, 4, 5, 6]
+var after2 = [1, 2, 3, 4, 5, 7]
 ```
 
 ###diff
@@ -19,19 +19,24 @@ Set diff returns you all inserted and deleted elements:
 
 ``` js
 var diff = require('diff-patch-merge').set.diff
-var result = diff(old, new1)
+
+var diff1 = diff(before, after1)
 // returns:
 {diff: [{delete: 3}, {insert: 5}, {insert: 6}]}
+
+var diff2 = diff(before, after2)
+// returns:
+{diff: [{insert: 5}, {insert: 7}]}
+
 ```
 
 ###merge
-You can merge multiple diffs that are based on the same old object:
+You can merge multiple diffs that are based on the same old object.
+It combines all diffs into a new diff annotating each change with the source diff:
+
 
 ``` js
 var merge = require('diff-patch-merge').set.merge
-
-var diff1 = diff(old, new1)
-var diff2 = diff(old, new2)
 
 var mergedDiff = merge([diff1, diff2])
 // returns:
@@ -45,8 +50,6 @@ var mergedDiff = merge([diff1, diff2])
 }
 ```
 
-merge() combines all diffs into a new diff annotating each change with the source diff.
-
 ###patch
 You can apply diffs as patches to an old set (results of merge() are diffs too):
 
@@ -59,5 +62,75 @@ var patched = patch(old, mergedDiff)
 ```
 
 ##Ordered Lists
+Ordered Lists are represented as JavaScript Arrays as well. As opposed to Sets diff/merge/patch for Ordered Lists considers the order of elements.
+
+##Ordered Sets
+Ordered Sets are similar to Ordered Lists except that all elements are globally unique.
+This allows diff/merge/patch to consider position changes of elements. In Ordered Lists position changes can only be seen as a delete and insert of the same element.
+
+Ordered Sets are represented as JavaScript arrays:
+
+``` js
+var before = [1, 2, 3, 4, 5],
+var after1 = [2, 6, 1, 5, 4, 3]
+var after2 = [2, 4, 1, 7, 3, 5]
+```
+
+###diff
+
+``` js
+var diff = require('diff-merge-patch').orderedSet.diff
+
+var diff1 = diff(before, after1)
+// returns:
+{
+  diff: [
+    [3, [{insert: 6}, {move: 0}]],
+    [4, [{move: 3}, {move: 2}]]
+  ]
+}
+
+var diff2 = diff(before, after2)
+// returns:
+{
+  diff: [
+    [3, [{move: 0}, {insert: 7}, {move: 2}]]
+  ]
+}
+```
+
+###merge
+Merging of Ordered List diffs can lead to conflicts:
+
+``` js
+var merge = require('diff-merge-patch').orderedSet.merge
+
+var mergedDiff = merge([diff1, diff2])
+// returns:
+{
+  diff: [
+    [3, [{insert: 6, source: [0]}, {move: 0, source: [0, 1]}, {insert: 7, source: [1]}, {move: 2, conflict: 1, source: [1]}]],
+    [4, [{move: 3, source: [0]}, {move: 2, conflict: 1, source: [0]}]]
+  ],
+  conflict: 1
+}
+```
+
+Each corresponding conflict receives the same conflict-ID.
+To use a diff including conflicts to patch the old ordered set you first have to resolve them.
+The library comes with a simple conflict resolution strategy which you can invoke like this:
+
+``` js
+var resolvedDiff = mergedDiff.resolveConflicts()
+// returns:
+{
+  diff: [
+    [3, [{insert: 6, source: [0]}, {move: 0, source: [0, 1]}, {insert: 7, source: [1]}]],
+    [4, [{move: 3, source: [0]}, {move: 2, source: [0]}]]
+  ]
+}
+```
+The algorithm simply picks the conflicting update that comes from the first diff (source: [0]).
+Depending on your application you may want to implement different resolution strategies.
 
 ##Dictionaries
