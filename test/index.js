@@ -42,13 +42,15 @@ var testPatch = function(patch, testData) { return function() {
   })
 }}
 
-var test = function(module, testData) {
+var test = function(module, testData) { return function() {
   describe('diff', testDiff(module.diff, testData))
   describe('merge', testMerge(module.merge, testData))
   describe('patch', testPatch(module.patch, testData))
-}
+}}
 
-describe('ordered-set', function() {
-  test(require('../lib/index').orderedSet, require('./test-data/ordered-set'))
-})
+describe('set', test(require('../lib/index').set, require('./test-data/set')))
+
+describe('ordered-set', test(require('../lib/index').orderedSet, require('./test-data/ordered-set')))
+
+describe('object', test(require('../lib/index').object, require('./test-data/object')))
 

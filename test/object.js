@@ -1,16 +1,10 @@
 
 var assert = require('assert')
-var merge = require('../../lib/index').object.merge
+var merge = require('../lib/index').object.merge
 var Result = merge.Result
-var testData = require('./test-data')
+var testData = require('./test-data/object')
 
 describe('object merging', function() {
-  it('should do a 3-way merge', function() {
-    testData.forEach(function(each) {
-      var result = merge([each.diffs[0], each.diffs[1]])
-      assert.deepEqual(result, each.diffsMerged)
-    })
-  })
   it('should test an n-way merge', function() {
     var diffs = testData[0].diffs
     var diff3 = { diff: { '2': {value: 3}, '3': {value: null}, '4': {value: 6}, '7': {value: 9} } }
