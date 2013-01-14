@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var patch = require('../../lib/index').collection.patch
+var patch = require('../../lib/index').set.patch
 var testData = require('./test-data')
 
 describe('collection patching', function() {

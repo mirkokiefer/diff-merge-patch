@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var merge = require('../../lib/index').collection.merge
+var merge = require('../../lib/index').set.merge
 var testData = require('./test-data')
 
 describe('collection merging', function() {

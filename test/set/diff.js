@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-var diff = require('../../lib/index').collection.diff
+var diff = require('../../lib/index').set.diff
 var Result = diff.Result
 var testData = require('./test-data')
 
