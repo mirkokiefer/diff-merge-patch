@@ -48,6 +48,7 @@ var test = function(module, testData) {
   describe('patch', testPatch(module.patch, testData))
 }
 
-describe('array', function() {
-  test(require('../lib/index').array, require('./test-data/array'))
+describe('ordered-set', function() {
+  test(require('../lib/index').orderedSet, require('./test-data/ordered-set'))
 })
+
