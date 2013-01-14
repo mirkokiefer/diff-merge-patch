@@ -62,11 +62,11 @@ var patched = patch(old, mergedDiff)
 ```
 
 ##Ordered Lists
-Ordered Lists are represented as JavaScript Arrays as well. As opposed to Sets diff/merge/patch for Ordered Lists considers the order of elements.
+Ordered lists are represented as JavaScript Arrays as well. As opposed to sets diff/merge/patch for ordered lists considers the order of elements.
 
 ##Ordered Sets
 Ordered Sets are similar to Ordered Lists except that all elements are globally unique.
-This allows diff/merge/patch to consider position changes of elements. In Ordered Lists position changes can only be seen as a delete and insert of the same element.
+This allows diff/merge/patch to consider position changes of elements. In ordered lists position changes can not be recognized and are only seen as a delete and insert of the same element.
 
 Ordered Sets are represented as JavaScript arrays:
 
@@ -132,5 +132,16 @@ var resolvedDiff = mergedDiff.resolveConflicts()
 ```
 The algorithm simply picks the conflicting update that comes from the first diff (source: [0]).
 Depending on your application you may want to implement different resolution strategies.
+
+###patch
+Diffs can be used to patch the original ordered list:
+
+``` js
+var patch = require('diff-merge-patch').orderedSet.patch
+
+var patched = patch(before, resolvedDiff)
+// returns:
+[2, 6, 1, 7, 5, 4, 3]
+```
 
 ##Dictionaries
