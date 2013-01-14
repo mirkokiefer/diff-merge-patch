@@ -1,7 +1,7 @@
 
 var assert = require('assert')
 var array = require('../lib/index').array
-var diff = array.diff({unique: true})
+var diff = array.diff
 var merge = array.merge
 var Result = merge.Result
 var patch = array.patch
