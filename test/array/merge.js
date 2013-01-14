@@ -12,32 +12,13 @@ describe('array merge', function() {
       assert.deepEqual(result, each.diffsMerged)
     })
   })
-  /*it('should test commutative conflict resolution', function() {
-    var changes1 = new Result({
-      "insert":[[1,[6]],[3,[7]],[0,[8]]],
-      "move":[
-        [[1,[0,1]],[4,[3,1]]],
-        [[2,[0,1]],[4,[3,1]]],
-        [[4,[3,1]]]
-      ],
-      conflict: true
+  it('should test conflict resolution', function() {
+    testData.forEach(function(each) {
+      if (each.diffsMergedResolved) {
+        var diff = new Result(each.diffsMerged.diff, each.diffsMerged.conflict)
+        var resolved = diff.resolveConflicts()
+        assert.deepEqual(resolved, each.diffsMergedResolved)
+      }
     })
-    var changes2 = new Result({
-      "insert":[[1,[6]],[3,[7]],[0,[8]]],
-      "move":[
-        [[4,[3,1]]],
-        [[2,[0,1]],[4,[3,1]]],
-        [[1,[0,1]],[4,[3,1]]]
-      ],
-      conflict: true
-    })
-    var expected = {
-      "insert":[[1,[6]],[3,[7]],[0,[8]]],
-      "move": [[1,[0,1]],[4,[3,1]]]
-    }
-    var resolvedResult1 = changes1.resolveConflicts()
-    var resolvedResult2 = changes2.resolveConflicts()
-    assert.deepEqual(resolvedResult1, expected)
-    assert.deepEqual(resolvedResult1, resolvedResult2)
-  })*/
+  })
 })

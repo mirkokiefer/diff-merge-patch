@@ -90,6 +90,12 @@ module.exports = [
         [4, [{move: 3, source: [0]}, {move: 2, conflict: 1, source: [0]}]]
       ],
       conflict: 1
+    },
+    diffsMergedResolved: {
+      diff: [
+        [3, [{insert: 6, source: [0]}, {move: 0, source: [0, 1]}, {insert: 7, source: [1]}]],
+        [4, [{move: 3, source: [0]}, {move: 2, source: [0]}]]
+      ]
     }
   }, {
     //test deletes:
@@ -139,6 +145,11 @@ module.exports = [
         [null, [{move: 4, conflict: 1, source: [0]}]]
       ],
       conflict: 1
+    },
+    diffsMergedResolved: {
+      diff: [
+        [null, [{move: 4, source: [0]}]]
+      ]
     }
   }/*, {
     before: [1, 2, 3, 4, 5, 6],
