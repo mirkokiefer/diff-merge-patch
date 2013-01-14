@@ -24,7 +24,7 @@ describe('array', function() {
   describe('merge', function() {
     testData.forEach(function(each, i) {
       it('should merge the diffs at ' + i, function() {
-        var result = merge(each.diffs[0], each.diffs[1])
+        var result = merge([each.diffs[0], each.diffs[1]])
         assert.deepEqual(result, each.diffsMerged)
       })
     })
