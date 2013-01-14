@@ -96,7 +96,8 @@ module.exports = [
         [3, [{insert: 6, source: [0]}, {move: 0, source: [0, 1]}, {insert: 7, source: [1]}]],
         [4, [{move: 3, source: [0]}, {move: 2, source: [0]}]]
       ]
-    }
+    },
+    result: [2,6,1,7,5,4,3]
   }, {
     //test deletes:
     before: [1, 2, 3, 4, 5],
