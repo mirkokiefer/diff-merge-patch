@@ -6,19 +6,19 @@ var Result = merge.Result
 var testData = require('./test-data')
 
 describe('array merge', function() {
-  it('should merge diffs', function() {
-    testData.forEach(function(each) {
+  testData.forEach(function(each, i) {
+    it('should merge the diffs at ' + i, function() {
       var result = merge(each.diffs[0], each.diffs[1])
       assert.deepEqual(result, each.diffsMerged)
     })
   })
-  it('should test conflict resolution', function() {
-    testData.forEach(function(each) {
-      if (each.diffsMergedResolved) {
+  testData.forEach(function(each, i) {
+    if (each.diffsMergedResolved) {
+      it('should test conflict resolution at ' + i, function() {
         var diff = new Result(each.diffsMerged.diff, each.diffsMerged.conflict)
         var resolved = diff.resolveConflicts()
         assert.deepEqual(resolved, each.diffsMergedResolved)
-      }
-    })
+      })
+    }
   })
 })
