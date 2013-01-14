@@ -1,5 +1,5 @@
 {
-  "name": "patch-diff",
+  "name": "diff-merge-patch",
   "version": "0.3.0",
   "description": "diff and patch sets, objects and arrays",
   "main": "lib/index.js",
