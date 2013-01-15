@@ -26,6 +26,33 @@ module.exports = [
       ],
       delete: [{index: 2, source: [0]}]
     }
+  }, {
+    before: [1, 2, 3, 4, 5],
+    after: [
+      [2, 6, 1, 5, 4, 3],
+      [2, 4, 1, 7, 3, 5]
+    ],
+    diffs: [
+      {
+        "insert":[
+          [3, [{"values": [6,1]}]],
+          [4, [{"values": [4,3]}]]
+        ],
+        "delete": [{"index": 0},{"index": 2},{"index": 3}]
+      }, {
+        "insert": [
+          [3, [{"values":[1, 7, 3]}]]
+        ],
+        "delete": [{"index":0}, {"index":2}]
+      }
+    ],
+    diffsMerged: {
+      "insert":[
+        [3,[{"values":[6,1],"source":0},{"values":[1,7,3],"source":1}]],
+        [4,[{"values":[4,3],"source":0}]]
+      ],
+      "delete":[{"index":0,"source":[0,1]},{"index":2,"source":[0,1]},{"index":3,"source":[0]}]
+    }
   }
 ]
 

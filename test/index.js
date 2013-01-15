@@ -6,7 +6,6 @@ var testDiff = function(diff, testData) { return function() {
     each.after.forEach(function(eachAfter, i) {
       it('should find the position diff at ' + j + '.' + i, function() {
         var result = diff(each.before, eachAfter)
-        // why does this sometimes not work without stringify?? :
         assert.deepEqual(result, each.diffs[i])
       })
     })
