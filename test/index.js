@@ -41,7 +41,7 @@ var testPatch = function(patch, testData) { return function() {
     })
     if (each.result) {
       it('should patch an array using the merged diffs at ' + i, function() {
-        var result = patch(each.before, each.diffsMergedResolved)
+        var result = patch(each.before, each.diffsMergedResolved || each.diffsMerged)
         assert.deepEqual(result, each.result)
       })
     }

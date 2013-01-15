@@ -25,7 +25,8 @@ module.exports = [
         [3, [{values: [5, 7], source: 0}, {values: [7], source: 1}]]
       ],
       delete: [{index: 2, source: [0]}]
-    }
+    },
+    result: [6,1,2,4,5,7,7]
   }, {
     before: [1, 2, 3, 4, 5],
     after: [
