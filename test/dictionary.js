@@ -1,10 +1,10 @@
 
 var assert = require('assert')
-var merge = require('../lib/index').object.merge
+var merge = require('../lib/index').dictionary.merge
 var Result = merge.Result
-var testData = require('./test-data/object')
+var testData = require('./test-data/dictionary')
 
-describe('object merging', function() {
+describe('dictionary merging', function() {
   it('should test an n-way merge', function() {
     var diffs = testData[0].diffs
     var diff3 = { diff: { '2': {value: 3}, '3': {value: null}, '4': {value: 6}, '7': {value: 9} } }

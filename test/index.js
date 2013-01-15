@@ -60,5 +60,5 @@ describe('ordered-list', test(require('../lib/index').orderedList, require('./te
 
 describe('ordered-set', test(require('../lib/index').orderedSet, require('./test-data/ordered-set')))
 
-describe('object', test(require('../lib/index').object, require('./test-data/object')))
+describe('dictionary', test(require('../lib/index').dictionary, require('./test-data/dictionary')))
 
