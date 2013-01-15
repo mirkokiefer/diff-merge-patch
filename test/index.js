@@ -6,6 +6,7 @@ var testDiff = function(diff, testData) { return function() {
     each.after.forEach(function(eachAfter, i) {
       it('should find the position diff at ' + j + '.' + i, function() {
         var result = diff(each.before, eachAfter)
+        // why does this sometimes not work without stringify?? :
         assert.deepEqual(result, each.diffs[i])
       })
     })
@@ -55,6 +56,8 @@ var test = function(module, testData) { return function() {
 }}
 
 describe('set', test(require('../lib/index').set, require('./test-data/set')))
+
+describe('ordered-list', test(require('../lib/index').orderedList, require('./test-data/ordered-list')))
 
 describe('ordered-set', test(require('../lib/index').orderedSet, require('./test-data/ordered-set')))
 
