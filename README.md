@@ -62,7 +62,58 @@ var patched = patch(old, mergedDiff)
 ```
 
 ##Ordered Lists
-Ordered lists are represented as JavaScript Arrays as well. As opposed to sets diff/merge/patch for ordered lists considers the order of elements.
+If you want the order of elements considered when doing a diff/merge/patch, ordered lists are the solution for you!
+
+Just like sets they are represented as JavaScript arrays:
+
+``` js
+var before = [1, 2, 3, 4]
+var after1 = [1, 2, 4, 5, 7]
+var after2 = [6, 1, 2, 3, 4, 7]
+```
+
+###diff
+
+``` js
+var diff = require('diff-merge-patch').orderedList.diff
+
+var diff1 = diff(before, after1)
+// returns:
+{
+  insert: [
+    [3, [{values: [5, 7]}]],
+  ],
+  delete: [{index: 2}]
+}
+```
+
+###merge
+
+Merging ordered list diffs never results in conflicts.
+
+``` js
+var merge = require('diff-merge-patch').orderedList.merge
+
+var mergedDiff = merge([diff1, diff2])
+// returns:
+{
+  insert: [
+    [-1, [{values: [6], source: 1}]],
+    [3, [{values: [5, 7], source: 0}, {values: [7], source: 1}]]
+  ],
+  delete: [{index: 2, source: [0]}]
+}
+```
+
+###patch
+
+``` js
+var patch = require('diff-merge-patch').orderedSet.patch
+
+var patched = patch(before, resolvedDiff)
+// returns:
+[6, 1, 2, 4, 5, 7, 7]
+```
 
 ##Ordered Sets
 Ordered Sets are similar to Ordered Lists except that all elements are globally unique.
@@ -105,6 +156,7 @@ Merging of Ordered List diffs can lead to conflicts:
 ``` js
 var merge = require('diff-merge-patch').orderedSet.merge
 
+// Note: orderedSet.merge() currently only accepts two diffs as input
 var mergedDiff = merge([diff1, diff2])
 // returns:
 {
@@ -145,3 +197,23 @@ var patched = patch(before, resolvedDiff)
 ```
 
 ##Dictionaries
+
+The same set of functions is implemented for dictionaries.
+They are represented as JavaScript Objects:
+
+``` js
+var dictionary = require('diff-merge-patch').dictionary
+
+var before = {1: 1, 2: 2, 3: 3, 4: 4}
+var after1 = {5: 6, 3: 8, 2: 2, 4: 4, 1: 5}
+var after2 = {2: 2, 1: 9, 4: 5}
+
+var diff1 = dictionary.diff(before, after1)
+var diff2 = dictionary.diff(before, after2)
+
+var diffsMerged = dictionary.merge([diff1, diff2])
+// resolve all conflicts:
+diffsMerged = diffsMerged.resolveConflicts()
+
+var result = patch(before, diffsMerged)
+```
