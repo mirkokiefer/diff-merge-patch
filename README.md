@@ -31,7 +31,7 @@ var diff2 = diff(before, after2)
 ```
 
 ###merge
-You can merge multiple diffs that are based on the same old object.
+You can merge multiple diffs that are based on the same old object.  
 It combines all diffs into a new diff annotating each change with the source diff:
 
 
@@ -116,7 +116,7 @@ var patched = patch(before, resolvedDiff)
 ```
 
 ##Ordered Sets
-Ordered Sets are similar to Ordered Lists except that all elements are globally unique.
+Ordered Sets are similar to Ordered Lists except that all elements are globally unique.  
 This allows diff/merge/patch to consider position changes of elements. In ordered lists position changes can not be recognized and are only seen as a delete and insert of the same element.
 
 Ordered Sets are represented as JavaScript arrays:
@@ -168,8 +168,8 @@ var mergedDiff = merge([diff1, diff2])
 }
 ```
 
-Each corresponding conflict receives the same conflict-ID.
-To use a diff including conflicts to patch the old ordered set you first have to resolve them.
+Each corresponding conflict receives the same conflict-ID.  
+To use a diff including conflicts to patch the old ordered set you first have to resolve them.  
 The library comes with a simple conflict resolution strategy which you can invoke like this:
 
 ``` js
@@ -182,7 +182,7 @@ var resolvedDiff = mergedDiff.resolveConflicts()
   ]
 }
 ```
-The algorithm simply picks the conflicting update that comes from the first diff (source: [0]).
+The algorithm simply picks the conflicting update that comes from the first diff (source: [0]).  
 Depending on your application you may want to implement different resolution strategies.
 
 ###patch
@@ -198,7 +198,7 @@ var patched = patch(before, resolvedDiff)
 
 ##Dictionaries
 
-The same set of functions is implemented for dictionaries.
+The same set of functions is implemented for dictionaries.  
 They are represented as JavaScript Objects:
 
 ``` js
