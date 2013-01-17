@@ -1,9 +1,9 @@
 #diff-merge-patch
-For sets, ordered lists and dictionaries this library gives you the following functions:
+Diff, merge and patch sets, ordered lists, ordered sets and dictionaries in JavaScript:
 
-- diff(before, after) - returns you all changes in new since old
+- diff(before, after) - returns you all changes in 'after' since 'before'
 - merge(diffs) - merges multiple diffs on the same base object identifying all conflicts
-- patch(old, diff) - patches an object using a (merged) diff
+- patch(before, diff) - patches an object using a (merged) diff
 
 ##Sets
 Sets are represented as JavasScript Arrays:
@@ -217,3 +217,6 @@ diffsMerged = diffsMerged.resolveConflicts()
 
 var result = patch(before, diffsMerged)
 ```
+
+##Contributors
+This project was created by Mirko Kiefer ([@mirkok](https://github.com/mirkok)).
