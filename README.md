@@ -1,4 +1,4 @@
-#diff-merge-patch
+#difftools
 Diff, merge and patch sets, ordered lists, ordered sets and dictionaries in JavaScript:
 
 - diff(before, after) - returns you all changes in 'after' since 'before'
