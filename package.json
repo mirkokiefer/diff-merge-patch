@@ -1,7 +1,7 @@
 {
-  "name": "diff-merge-patch",
+  "name": "difftools",
   "version": "0.4.0",
-  "description": "diff and patch sets, objects and arrays",
+  "description": "diff, merge and patch sets, dictionaries and lists",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha test/*"
