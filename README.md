@@ -218,5 +218,10 @@ diffsMerged = diffsMerged.resolveConflicts()
 var result = patch(before, diffsMerged)
 ```
 
+##Todo
+- Trees (Ordered/Unordered)
+- Tuple set (for tabular data e.g. from a relational database)
+
+
 ##Contributors
 This project was created by Mirko Kiefer ([@mirkok](https://github.com/mirkok)).
