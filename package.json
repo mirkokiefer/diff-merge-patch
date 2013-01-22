@@ -3,6 +3,7 @@
   "version": "0.4.0",
   "description": "diff, merge and patch sets, dictionaries and lists",
   "main": "lib/index.js",
+  "homepage": "https://github.com/mirkok/diff-merge-patch",
   "scripts": {
     "test": "mocha test/*"
   },
