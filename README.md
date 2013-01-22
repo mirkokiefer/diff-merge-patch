@@ -2,10 +2,17 @@
 Diff, merge and patch sets, ordered lists, ordered sets and dictionaries in JavaScript:
 
 - diff(before, after) - returns you all changes in 'after' since 'before'
-- merge(diffs) - merges multiple diffs on the same base object identifying all conflicts
+- merge(diffs) - 3-way merging of multiple diffs on the same base object
 - patch(before, diff) - patches an object using a (merged) diff
 
-##Sets
+##Design goals
+- **its all just diffs**: merge should only need diffs as input and returns itself a new diff
+- **no magic**: make any merge conflicts explicit to cater for different conflict resolution mechanisms
+- **be commutative**: the order of diffs in a merge should not matter
+- **be recursive**: implement diff, patch and merge for basic data structures and use them to support complex data structures
+
+##Supported Data Structures
+###Sets
 Sets are represented as JavasScript Arrays:
 
 ``` js
@@ -14,7 +21,7 @@ var after1 = [1, 2, 4, 5, 6]
 var after2 = [1, 2, 3, 4, 5, 7]
 ```
 
-###diff
+####diff
 Set diff returns you all inserted and deleted elements:
 
 ``` js
@@ -30,7 +37,7 @@ var diff2 = diff(before, after2)
 
 ```
 
-###merge
+####merge
 You can merge multiple diffs that are based on the same old object.  
 It combines all diffs into a new diff annotating each change with the source diff:
 
@@ -50,7 +57,7 @@ var mergedDiff = merge([diff1, diff2])
 }
 ```
 
-###patch
+####patch
 You can apply diffs as patches to an old set (results of merge() are diffs too):
 
 ``` js
@@ -61,7 +68,7 @@ var patched = patch(old, mergedDiff)
 [1, 2, 4, 5, 6, 7]
 ```
 
-##Ordered Lists
+###Ordered Lists
 If you want the order of elements considered when doing a diff/merge/patch, ordered lists are the solution for you!
 
 Just like sets they are represented as JavaScript arrays:
@@ -72,7 +79,7 @@ var after1 = [1, 2, 4, 5, 7]
 var after2 = [6, 1, 2, 3, 4, 7]
 ```
 
-###diff
+####diff
 
 ``` js
 var diff = require('diff-merge-patch').orderedList.diff
@@ -87,7 +94,7 @@ var diff1 = diff(before, after1)
 }
 ```
 
-###merge
+####merge
 
 Merging ordered list diffs never results in conflicts.
 
@@ -105,7 +112,7 @@ var mergedDiff = merge([diff1, diff2])
 }
 ```
 
-###patch
+####patch
 
 ``` js
 var patch = require('diff-merge-patch').orderedSet.patch
@@ -115,9 +122,9 @@ var patched = patch(before, resolvedDiff)
 [6, 1, 2, 4, 5, 7, 7]
 ```
 
-##Ordered Sets
+###Ordered Sets
 Ordered Sets are similar to Ordered Lists except that all elements are globally unique.  
-This allows diff/merge/patch to consider position changes of elements. In ordered lists position changes can not be recognized and are only seen as a delete and insert of the same element.
+This allows diff/merge/patch to consider position changes of elements. In ordered list diffs there is not notion of movement, they can only be seen as a delete and insert of the same element.
 
 Ordered Sets are represented as JavaScript arrays:
 
@@ -127,7 +134,7 @@ var after1 = [2, 6, 1, 5, 4, 3]
 var after2 = [2, 4, 1, 7, 3, 5]
 ```
 
-###diff
+####diff
 
 ``` js
 var diff = require('diff-merge-patch').orderedSet.diff
@@ -150,7 +157,7 @@ var diff2 = diff(before, after2)
 }
 ```
 
-###merge
+####merge
 Merging of Ordered List diffs can lead to conflicts:
 
 ``` js
@@ -185,7 +192,7 @@ var resolvedDiff = mergedDiff.resolveConflicts()
 The algorithm simply picks the conflicting update that comes from the first diff (source: [0]).  
 Depending on your application you may want to implement different resolution strategies.
 
-###patch
+####patch
 Diffs can be used to patch the original ordered list:
 
 ``` js
@@ -196,7 +203,7 @@ var patched = patch(before, resolvedDiff)
 [2, 6, 1, 7, 5, 4, 3]
 ```
 
-##Dictionaries
+###Dictionaries
 
 The same set of functions is implemented for dictionaries.  
 They are represented as JavaScript Objects:
@@ -219,9 +226,11 @@ var result = patch(before, diffsMerged)
 ```
 
 ##Todo
-- Trees (Ordered/Unordered)
+- Trees (Ordered/Unordered) - can be built using the core data structures
 - Tuple set (for tabular data e.g. from a relational database)
 
 
 ##Contributors
 This project was created by Mirko Kiefer ([@mirkok](https://github.com/mirkok)).
+
+
