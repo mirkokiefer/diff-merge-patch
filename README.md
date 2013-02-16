@@ -124,7 +124,7 @@ var patched = patch(before, resolvedDiff)
 
 ###Ordered Sets
 Ordered Sets are similar to Ordered Lists except that all elements are globally unique.  
-This allows diff/merge/patch to consider position changes of elements. In ordered list diffs there is not notion of movement, they can only be seen as a delete and insert of the same element.
+This allows diff/merge/patch to consider position changes of elements. In ordered list diffs there is no notion of movement, they can only be seen as a delete and insert of the same element.
 
 Ordered Sets are represented as JavaScript arrays:
 
