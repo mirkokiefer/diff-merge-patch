@@ -231,6 +231,6 @@ var result = patch(before, diffsMerged)
 
 
 ##Contributors
-This project was created by Mirko Kiefer ([@mirkok](https://github.com/mirkok)).
+This project was created by Mirko Kiefer ([@mirkokiefer](https://github.com/mirkokiefer)).
 
 
