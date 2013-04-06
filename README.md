@@ -216,9 +216,37 @@ var after1 = {5: 6, 3: 8, 2: 2, 4: 4, 1: 5}
 var after2 = {2: 2, 1: 9, 4: 5}
 
 var diff1 = dictionary.diff(before, after1)
+// returns:
+{
+  diff: {
+    5: {value: 6},
+    1: {value: 5},
+    3: {value: 8}
+  }
+}
+
 var diff2 = dictionary.diff(before, after2)
+// returns:
+{
+  diff: {
+    1: {value: 9},
+    4: {value: 5},
+    3: {value: null}
+  }
+}
 
 var diffsMerged = dictionary.merge([diff1, diff2])
+// returns merged diffs with conflicts:
+{
+  diff: {
+    1: [{value: 5, source: [0]}, {value: 9, source: [1]}],
+    3: [{value: 8, source: [0]}, {value: null, source: [1]}],
+    4: {value: 5, source: [1]},
+    5: {value: 6, source: [0]}
+  },
+  conflict: [1, 3]
+}
+
 // resolve all conflicts:
 diffsMerged = diffsMerged.resolveConflicts()
 
