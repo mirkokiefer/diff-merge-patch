@@ -12,6 +12,11 @@ Diff, merge and patch sets, ordered lists, ordered sets and dictionaries in Java
 - **be recursive**: implement diff, patch and merge for basic data structures and use them to support complex data structures
 
 ##Supported Data Structures
+- [Sets](#sets)
+- [Ordered Lists](#ordered-lists)
+- [Ordered Sets](#ordered-sets)
+- [Dictionaries](#dictionaries)
+
 ###Sets
 Sets are represented as JavasScript Arrays:
 
