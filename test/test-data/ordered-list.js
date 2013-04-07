@@ -45,6 +45,7 @@ module.exports = [
       {op: '-', indexBefore: 2, length: 2, source: [0, 1]},
       {op: '-', indexBefore: 4, length: 1, source: [1]},
       {op: '+', indexBefore: 4, values: [9, 10], source: [0]},
+      {op: '+', indexBefore: 5, values: [9], source: [1]},
       {op: '+', indexBefore: 6, values: [11], source: [0]}
     ]
   }
