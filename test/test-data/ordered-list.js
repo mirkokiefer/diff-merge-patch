@@ -7,27 +7,22 @@ module.exports = [
       [6, 1, 2, 3, 4, 7]
     ],
     diffs: [
-      {
-        insert: [
-          [3, [{values: [5, 7]}]],
-        ],
-        delete: [{index: 2}]
-      }, {
-        insert: [
-          [-1, [{values: [6]}]],
-          [3, [{values: [7]}]]
-        ]
-      }
+      [
+        {op: '-', length: 1, indexBefore: 1, indexAfter: 1},
+        {op: '+', indexBefore: 3, indexAfter: 2, values: [5, 7]}
+      ], [
+        {op: '+', indexBefore: -1, indexAfter: -1, values: [6]},
+        {op: '+', indexBefore: 3, indexAfter: 4, values: [7]}
+      ]
     ],
-    diffsMerged: {
-      insert: [
-        [-1, [{values: [6], source: 1}]],
-        [3, [{values: [5, 7], source: 0}, {values: [7], source: 1}]]
-      ],
-      delete: [{index: 2, source: [0]}]
-    },
+    diffsMerged: [
+      {op: '+', indexBefore: -1, indexAfter: -1, values: [6], source: [1]},
+      {op: '-', length: 1, indexBefore: 2, indexAfter: 1, source: [0]},
+      {op: '+', indexBefore: 3, indexAfter: 2, values: [5, 7], source: [0]},
+      {op: '+', indexBefore: 3, indexAfter: 4, values: [7], source: [1]}
+    ],
     result: [6, 1, 2, 4, 5, 7, 7]
-  }, {
+  }/*, {
     before: [1, 2, 3, 4, 5],
     after: [
       [2, 6, 1, 5, 4, 3],
@@ -54,7 +49,7 @@ module.exports = [
       ],
       "delete":[{"index":0,"source":[0,1]},{"index":2,"source":[0,1]},{"index":3,"source":[0]}]
     }
-  }
+  }*/
 ]
 
 /*
