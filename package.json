@@ -1,6 +1,6 @@
 {
   "name": "diff-merge-patch",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "diff, merge and patch sets, dictionaries and lists",
   "main": "lib/index.js",
   "homepage": "https://github.com/mirkok/diff-merge-patch",
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "underscore": "~1.4.3",
-    "longest-common-substring": "0.0.1"
+    "longest-common-substring": "0.0.1",
+    "diff-merge-patch": "0.4.0"
   }
 }
