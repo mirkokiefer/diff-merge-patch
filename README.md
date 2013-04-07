@@ -91,12 +91,10 @@ var diff = require('diff-merge-patch').orderedList.diff
 
 var diff1 = diff(before, after1)
 // returns:
-{
-  insert: [
-    [3, [{values: [5, 7]}]],
-  ],
-  delete: [{index: 2}]
-}
+[
+  {op: '-', length: 1, indexBefore: 1, indexAfter: 1},
+  {op: '+', indexBefore: 3, indexAfter: 2, values: [5, 7]}
+]
 ```
 
 ####merge
@@ -108,21 +106,20 @@ var merge = require('diff-merge-patch').orderedList.merge
 
 var mergedDiff = merge([diff1, diff2])
 // returns:
-{
-  insert: [
-    [-1, [{values: [6], source: 1}]],
-    [3, [{values: [5, 7], source: 0}, {values: [7], source: 1}]]
-  ],
-  delete: [{index: 2, source: [0]}]
-}
+[
+  {op: '+', indexBefore: -1, values: [6], source: [1]},
+  {op: '-', length: 1, indexBefore: 1, source: [0]},
+  {op: '+', indexBefore: 3, values: [5, 7], source: [0]},
+  {op: '+', indexBefore: 3, values: [7], source: [1]}
+]
 ```
 
 ####patch
 
 ``` js
-var patch = require('diff-merge-patch').orderedSet.patch
+var patch = require('diff-merge-patch').orderedList.patch
 
-var patched = patch(before, resolvedDiff)
+var patched = patch(before, mergedDiff)
 // returns:
 [6, 1, 2, 4, 5, 7, 7]
 ```
