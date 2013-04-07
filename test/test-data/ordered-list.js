@@ -16,40 +16,38 @@ module.exports = [
       ]
     ],
     diffsMerged: [
-      {op: '+', indexBefore: -1, indexAfter: -1, values: [6], source: [1]},
-      {op: '-', length: 1, indexBefore: 1, indexAfter: 1, source: [0]},
-      {op: '+', indexBefore: 3, indexAfter: 2, values: [5, 7], source: [0]},
-      {op: '+', indexBefore: 3, indexAfter: 4, values: [7], source: [1]}
+      {op: '+', indexBefore: -1, values: [6], source: [1]},
+      {op: '-', length: 1, indexBefore: 1, source: [0]},
+      {op: '+', indexBefore: 3, values: [5, 7], source: [0]},
+      {op: '+', indexBefore: 3, values: [7], source: [1]}
     ],
     result: [6, 1, 2, 4, 5, 7, 7]
-  }/*, {
-    before: [1, 2, 3, 4, 5],
+  }, {
+    before: [1, 2, 3, 4, 5, 6, 7, 8],
     after: [
-      [2, 6, 1, 5, 4, 3],
-      [2, 4, 1, 7, 3, 5]
+      [5, 6, 1, 2, 3, 9, 10, 6, 7, 11, 8],
+      [1, 2, 9, 7, 8]
     ],
     diffs: [
-      {
-        "insert":[
-          [3, [{"values": [6,1]}]],
-          [4, [{"values": [4,3]}]]
-        ],
-        "delete": [{"index": 0},{"index": 2},{"index": 3}]
-      }, {
-        "insert": [
-          [3, [{"values":[1, 7, 3]}]]
-        ],
-        "delete": [{"index":0}, {"index":2}]
-      }
+      [
+        {op: '+', indexBefore: -1, indexAfter: -1, values: [5, 6]},
+        {op: '-', indexBefore: 2, indexAfter: 4, length: 2},
+        {op: '+', indexBefore: 4, indexAfter: 4, values: [9, 10]},
+        {op: '+', indexBefore: 6, indexAfter: 8, values: [11]}
+      ], [
+        {op: '-', indexBefore: 1, indexAfter: 1, length: 4},
+        {op: '+', indexBefore: 5, indexAfter: 1, values: [9]}
+      ]
     ],
-    diffsMerged: {
-      "insert":[
-        [3,[{"values":[6,1],"source":0},{"values":[1,7,3],"source":1}]],
-        [4,[{"values":[4,3],"source":0}]]
-      ],
-      "delete":[{"index":0,"source":[0,1]},{"index":2,"source":[0,1]},{"index":3,"source":[0]}]
-    }
-  }*/
+    diffsMerged: [
+      {op: '+', indexBefore: -1,  values: [5, 6], source: [0]},
+      {op: '-', indexBefore: 1, length: 1, source: [1]},
+      {op: '-', indexBefore: 2, length: 2, source: [0, 1]},
+      {op: '-', indexBefore: 4, length: 1, source: [1]},
+      {op: '+', indexBefore: 4, values: [9, 10], source: [0]},
+      {op: '+', indexBefore: 6, values: [11], source: [0]}
+    ]
+  }
 ]
 
 /*
