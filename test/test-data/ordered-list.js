@@ -17,7 +17,7 @@ module.exports = [
     ],
     diffsMerged: [
       {op: '+', indexBefore: -1, indexAfter: -1, values: [6], source: [1]},
-      {op: '-', length: 1, indexBefore: 2, indexAfter: 1, source: [0]},
+      {op: '-', length: 1, indexBefore: 1, indexAfter: 1, source: [0]},
       {op: '+', indexBefore: 3, indexAfter: 2, values: [5, 7], source: [0]},
       {op: '+', indexBefore: 3, indexAfter: 4, values: [7], source: [1]}
     ],
