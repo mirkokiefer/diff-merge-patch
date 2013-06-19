@@ -21,6 +21,15 @@ module.exports = [
         5: {value: 6, source: [0]}
       },
       conflict: [1, 3]
+    },
+    resolvePicking: 0,
+    diffsMergedResolved: {
+      diff: {
+        1: {value: 5, source: [0]},
+        3: {value: 8, source: [0]},
+        4: {value: 5, source: [1]},
+        5: {value: 6, source: [0]}
+      }
     }
   }, {
     before: {0: 1, 2: 2},
@@ -39,6 +48,14 @@ module.exports = [
         3: {value: 4, source: [0]}
       },
       conflict: [2]
+    },
+    resolvePicking: 0,
+    diffsMergedResolved: {
+      diff: {
+        0: {value: 3, source: [0, 1]},
+        2: {value: 4, source: [0]},
+        3: {value: 4, source: [0]}
+      }
     }
   }
 ]

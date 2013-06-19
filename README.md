@@ -182,7 +182,10 @@ To use a diff including conflicts to patch the old ordered set you first have to
 The library comes with a simple conflict resolution strategy which you can invoke like this:
 
 ``` js
-var resolvedDiff = mergedDiff.resolveConflicts()
+var resolve = require('diff-merge-path').orderedSet.resolve
+
+// pick source 0 as the winner of each conflict:
+var resolvedDiff = resolve(mergedDiff, 0)
 // returns:
 {
   diff: [
@@ -191,7 +194,7 @@ var resolvedDiff = mergedDiff.resolveConflicts()
   ]
 }
 ```
-The algorithm simply picks the conflicting update that comes from the first diff (source: [0]).  
+The algorithm simply picks the conflicting update that comes from the source you pass in.  
 Depending on your application you may want to implement different resolution strategies.
 
 ####patch
@@ -249,8 +252,8 @@ var diffsMerged = dictionary.merge([diff1, diff2])
   conflict: [1, 3]
 }
 
-// resolve all conflicts:
-diffsMerged = diffsMerged.resolveConflicts()
+// resolve all conflicts picking sourc 0 as the winner:
+diffsMerged = dictionary.resolve(diffsMerged, 0)
 
 var result = patch(before, diffsMerged)
 ```

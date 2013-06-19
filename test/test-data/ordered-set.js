@@ -91,6 +91,7 @@ module.exports = [
       ],
       conflict: 1
     },
+    resolvePicking: 0,
     diffsMergedResolved: {
       diff: [
         [3, [{insert: 6, source: [0]}, {move: 0, source: [0, 1]}, {insert: 7, source: [1]}]],
@@ -147,6 +148,7 @@ module.exports = [
       ],
       conflict: 1
     },
+    resolvePicking: 0,
     diffsMergedResolved: {
       diff: [
         [null, [{move: 4, source: [0]}]]

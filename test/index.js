@@ -19,16 +19,6 @@ var testMerge = function(merge, testData) { return function() {
       assert.deepEqual(result, each.diffsMerged)
     })
   })
-  var Result = merge.Result
-  testData.forEach(function(each, i) {
-    if (each.diffsMergedResolved) {
-      it('should test conflict resolution at ' + i, function() {
-        var diff = new Result(each.diffsMerged.diff, each.diffsMerged.conflict)
-        var resolved = diff.resolveConflicts()
-        assert.deepEqual(resolved, each.diffsMergedResolved)
-      })
-    }
-  })
 }}
 
 var testPatch = function(patch, testData) { return function() {
@@ -48,10 +38,22 @@ var testPatch = function(patch, testData) { return function() {
   })
 }}
 
+var testResolve = function(resolve, testData) { return function() {
+  testData.forEach(function(each, i) {
+    if (each.diffsMergedResolved) {
+      it('should resolve the conflicts in a merged diff at ' + i, function() {
+        var result = resolve(each.diffsMerged, each.resolvePicking)
+        assert.deepEqual(result, each.diffsMergedResolved)
+      })
+    }
+  })
+}}
+
 var test = function(module, testData) { return function() {
   describe('diff', testDiff(module.diff, testData))
   describe('merge', testMerge(module.merge, testData))
   describe('patch', testPatch(module.patch, testData))
+  describe('resolve', testResolve(module.resolve, testData))
 }}
 
 describe('set', test(require('../lib/index').set, require('./test-data/set')))
