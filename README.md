@@ -1,4 +1,9 @@
 #diff-merge-patch
+
+[![Build Status](https://travis-ci.org/mirkokiefer/diff-merge-patch.png?branch=master)](https://travis-ci.org/mirkokiefer/diff-merge-patch)
+
+[![NPM](https://nodei.co/npm/diff-merge-patch.png)](https://nodei.co/npm/diff-merge-patch/)
+
 Diff, merge and patch sets, ordered lists, ordered sets and dictionaries in JavaScript:
 
 - diff(before, after) - returns you all changes in 'after' since 'before'
@@ -10,6 +15,8 @@ Diff, merge and patch sets, ordered lists, ordered sets and dictionaries in Java
 - **no magic**: make any merge conflicts explicit to cater for different conflict resolution mechanisms
 - **be commutative**: the order of diffs in a merge should not matter
 - **be recursive**: implement diff, patch and merge for basic data structures and use them to support complex data structures
+
+**Use this library with caution, I have not used it in production and there are known bugs. You can help me improve the library by creating pull requests with failing tests or even improvements to the algorithms.**
 
 ##Supported Data Structures
 - [Sets](#sets)
