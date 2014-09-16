@@ -121,5 +121,19 @@ module.exports = [
         [null, [{move: 4, source: [0]}]]
       ]
     }
+  }, {
+    before: [],
+    after: [
+      ['a', 'b'],
+      ['b', 'a']
+    ],
+    diffs: [{
+      diff: [[-1,[{"insert":"a"},{"insert":"b"}]]]
+    }, {
+      diff: [[-1,[{"insert":"b"},{"insert":"a"}]]]
+    }],
+    diffsMerged: {
+      diff: []
+    }
   }
 ]
